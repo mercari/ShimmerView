@@ -1,15 +1,9 @@
 import UIKit
 
 public protocol ShimmerSyncTarget: UIResponder {
-    var baseColor: UIColor { get }
-    var highlightColor: UIColor { get }
-    var duration: CFTimeInterval { get }
-    var interval: CFTimeInterval { get }
-    var effectBeginTime: CFTimeInterval { get }
-    var effectSpan: ShimmerView.EffectSpan { get }
+    var style: ShimmerViewStyle { get }
 
-    /// The tilt angle of the effect. Please specify using radian.
-    var effectAngle: CGFloat { get }
+    var effectBeginTime: CFTimeInterval { get }
 
     var syncTargetView: UIView { get }
 }
