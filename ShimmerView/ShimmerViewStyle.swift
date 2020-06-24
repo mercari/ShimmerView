@@ -1,7 +1,7 @@
 import UIKit
 
 public extension ShimmerView {
-    enum EffectSpan {
+    enum EffectSpan: Equatable {
         case ratio(CGFloat)
         case points(CGFloat)
     }

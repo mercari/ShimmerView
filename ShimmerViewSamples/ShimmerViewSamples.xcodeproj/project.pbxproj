@@ -13,6 +13,17 @@
 		3D1774F4249B77C500A4C7B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D1774F3249B77C500A4C7B5 /* Assets.xcassets */; };
 		3D1774F7249B77C500A4C7B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D1774F5249B77C500A4C7B5 /* LaunchScreen.storyboard */; };
 		3D177500249B789D00A4C7B5 /* BasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1774FF249B789D00A4C7B5 /* BasicViewController.swift */; };
+		3D17755724A0C0F700A4C7B5 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17755624A0C0F700A4C7B5 /* SpacerView.swift */; };
+		3D17757024A0DF7800A4C7B5 /* ColorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17756F24A0DF7800A4C7B5 /* ColorInputView.swift */; };
+		3D17757224A19D9B00A4C7B5 /* NumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17757124A19D9B00A4C7B5 /* NumberInputView.swift */; };
+		3D17757424A1F6EE00A4C7B5 /* ColorElementInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17757324A1F6EE00A4C7B5 /* ColorElementInputView.swift */; };
+		3D17757624A2041400A4C7B5 /* EffectSpanInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17757524A2041400A4C7B5 /* EffectSpanInputView.swift */; };
+		3D17757824A2F5C900A4C7B5 /* OutlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17757724A2F5C900A4C7B5 /* OutlinedButton.swift */; };
+		3D17757A24A30FED00A4C7B5 /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17757924A30FED00A4C7B5 /* TextInputView.swift */; };
+		3D53F44024A33CEE00AECB38 /* EffectAngleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D53F43F24A33CEE00AECB38 /* EffectAngleInputView.swift */; };
+		3D53F44224A3435400AECB38 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D53F44124A3435400AECB38 /* UIColor+Extensions.swift */; };
+		3DAC488B24A3705D00D0F581 /* CurrentValueSubject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC488A24A3705D00D0F581 /* CurrentValueSubject+Extensions.swift */; };
+		3DAC48A424A3736F00D0F581 /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC48A324A3736F00D0F581 /* DisposeBag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +35,17 @@
 		3D1774F6249B77C500A4C7B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D1774F8249B77C500A4C7B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D1774FF249B789D00A4C7B5 /* BasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicViewController.swift; sourceTree = "<group>"; };
+		3D17755624A0C0F700A4C7B5 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
+		3D17756F24A0DF7800A4C7B5 /* ColorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorInputView.swift; sourceTree = "<group>"; };
+		3D17757124A19D9B00A4C7B5 /* NumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputView.swift; sourceTree = "<group>"; };
+		3D17757324A1F6EE00A4C7B5 /* ColorElementInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorElementInputView.swift; sourceTree = "<group>"; };
+		3D17757524A2041400A4C7B5 /* EffectSpanInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectSpanInputView.swift; sourceTree = "<group>"; };
+		3D17757724A2F5C900A4C7B5 /* OutlinedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedButton.swift; sourceTree = "<group>"; };
+		3D17757924A30FED00A4C7B5 /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
+		3D53F43F24A33CEE00AECB38 /* EffectAngleInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectAngleInputView.swift; sourceTree = "<group>"; };
+		3D53F44124A3435400AECB38 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		3DAC488A24A3705D00D0F581 /* CurrentValueSubject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentValueSubject+Extensions.swift"; sourceTree = "<group>"; };
+		3DAC48A324A3736F00D0F581 /* DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +78,8 @@
 		3D1774E9249B77C400A4C7B5 /* ShimmerViewSamples */ = {
 			isa = PBXGroup;
 			children = (
+				3DAC48A724A3799B00D0F581 /* CommonUI */,
+				3D53F44324A3442C00AECB38 /* Extensions */,
 				3D1774FE249B787D00A4C7B5 /* Basic */,
 				3D1774EA249B77C400A4C7B5 /* AppDelegate.swift */,
 				3D1774EC249B77C400A4C7B5 /* SceneDelegate.swift */,
@@ -71,8 +95,33 @@
 			isa = PBXGroup;
 			children = (
 				3D1774FF249B789D00A4C7B5 /* BasicViewController.swift */,
+				3D17756F24A0DF7800A4C7B5 /* ColorInputView.swift */,
+				3D17757124A19D9B00A4C7B5 /* NumberInputView.swift */,
+				3D17757324A1F6EE00A4C7B5 /* ColorElementInputView.swift */,
+				3D17757524A2041400A4C7B5 /* EffectSpanInputView.swift */,
+				3D53F43F24A33CEE00AECB38 /* EffectAngleInputView.swift */,
 			);
 			path = Basic;
+			sourceTree = "<group>";
+		};
+		3D53F44324A3442C00AECB38 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3D53F44124A3435400AECB38 /* UIColor+Extensions.swift */,
+				3DAC488A24A3705D00D0F581 /* CurrentValueSubject+Extensions.swift */,
+				3DAC48A324A3736F00D0F581 /* DisposeBag.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3DAC48A724A3799B00D0F581 /* CommonUI */ = {
+			isa = PBXGroup;
+			children = (
+				3D17757924A30FED00A4C7B5 /* TextInputView.swift */,
+				3D17757724A2F5C900A4C7B5 /* OutlinedButton.swift */,
+				3D17755624A0C0F700A4C7B5 /* SpacerView.swift */,
+			);
+			path = CommonUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +195,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D1774EF249B77C400A4C7B5 /* MainViewController.swift in Sources */,
+				3D17757824A2F5C900A4C7B5 /* OutlinedButton.swift in Sources */,
 				3D177500249B789D00A4C7B5 /* BasicViewController.swift in Sources */,
+				3D53F44224A3435400AECB38 /* UIColor+Extensions.swift in Sources */,
+				3D17757424A1F6EE00A4C7B5 /* ColorElementInputView.swift in Sources */,
+				3D53F44024A33CEE00AECB38 /* EffectAngleInputView.swift in Sources */,
 				3D1774EB249B77C400A4C7B5 /* AppDelegate.swift in Sources */,
+				3D17755724A0C0F700A4C7B5 /* SpacerView.swift in Sources */,
+				3DAC48A424A3736F00D0F581 /* DisposeBag.swift in Sources */,
+				3DAC488B24A3705D00D0F581 /* CurrentValueSubject+Extensions.swift in Sources */,
+				3D17757624A2041400A4C7B5 /* EffectSpanInputView.swift in Sources */,
 				3D1774ED249B77C400A4C7B5 /* SceneDelegate.swift in Sources */,
+				3D17757024A0DF7800A4C7B5 /* ColorInputView.swift in Sources */,
+				3D17757224A19D9B00A4C7B5 /* NumberInputView.swift in Sources */,
+				3D17757A24A30FED00A4C7B5 /* TextInputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
