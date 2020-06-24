@@ -43,6 +43,12 @@ class EffectSpanInputView: UIView {
         baseCharSet.formUnion(CharacterSet(charactersIn: "."))
         return baseCharSet
     }()
+    private var numberFormatter: NumberFormatter = {
+        var formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
     
     fileprivate enum ButtonKind: Int, CaseIterable {
         case ratio, points
@@ -160,9 +166,9 @@ class EffectSpanInputView: UIView {
     }()
     
     private var valueDidUpdateClosure: ((ShimmerView.EffectSpan) -> ())?
-    private var disposeBag = DisposeBag()
     
     private let state: CurrentValueSubject<State, Never>
+    private var disposeBag = DisposeBag()
     
     init(effectSpan: ShimmerView.EffectSpan) {
         state = CurrentValueSubject(effectSpan.effectSpanInputViewState)
@@ -190,7 +196,7 @@ class EffectSpanInputView: UIView {
         state.removeDuplicates().sink { [weak self] state in
             guard let self = self else { return }
             
-            self.numberInputView.textFiled.text = "\(state.number)"
+            self.numberInputView.textFiled.text = self.numberFormatter.string(for: state.number)
             for _button in self.buttons {
                 _button.isSelected = state.selectedButton.rawValue == _button.tag
             }
@@ -240,23 +246,21 @@ extension EffectSpanInputView: UITextFieldDelegate {
         return newString.count <= EffectSpanInputView.maxCharacterCount
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        guard let text = textField.text else {
-            return true
-        }
-        
-        guard let _ = Float(text) else {
-            return false
-        }
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let text = textField.text,
-            let floatValue = Float(text) else {
-                return
+        guard let text = textField.text else {
+            return
         }
-        state.mutate(\.number, CGFloat(floatValue))
+        
+        guard let convertedValue = Float(text) else {
+            textField.text = numberFormatter.string(for: state.value.number)
+            return
+        }
+
+        state.mutate(\.number, CGFloat(convertedValue))
     }
 }

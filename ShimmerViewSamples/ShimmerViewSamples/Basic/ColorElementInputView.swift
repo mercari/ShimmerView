@@ -1,6 +1,8 @@
 import UIKit
 
 class ColorElementInputView: UIView, UITextFieldDelegate {
+    private static let maxCharacterCount: Int = 3
+    
     enum Kind {
         case r, g, b
         var titleString: String {
@@ -51,7 +53,7 @@ class ColorElementInputView: UIView, UITextFieldDelegate {
     
     private var valueDidChangeClosure: ((Int) -> ())?
     
-    init(kind: Kind, defaultValue: Int = 0) {
+    init(kind: Kind, defaultValue: Int) {
         super.init(frame: .zero)
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +91,6 @@ class ColorElementInputView: UIView, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         // if string count == 0, return true
         guard string.count != 0 else {
             return true
@@ -101,7 +102,7 @@ class ColorElementInputView: UIView, UITextFieldDelegate {
         }
     
         // max length of the letters should be 3
-        guard ((textField.text ?? "") + string).count <= 3 else {
+        guard ((textField.text ?? "") + string).count <= ColorElementInputView.maxCharacterCount else {
             return false
         }
         

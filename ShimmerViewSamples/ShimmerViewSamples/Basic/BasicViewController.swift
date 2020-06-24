@@ -46,22 +46,22 @@ class BasicViewController: UIViewController {
     }()
     
     private let baseColorInputView: ColorInputView = {
-        let view = ColorInputView(kind: .base)
+        let view = ColorInputView(kind: .base, defaultValue: .magenta)
         return view
     }()
     
     private let highlightColorInputView: ColorInputView = {
-        let view = ColorInputView(kind: .highlight)
+        let view = ColorInputView(kind: .highlight, defaultValue: .magenta)
         return view
     }()
     
     private let durationInputView: NumberInputView = {
-        let view = NumberInputView(kind: .duration)
+        let view = NumberInputView(kind: .duration, defaultValue: 0)
         return view
     }()
     
     private let intervalInputView: NumberInputView = {
-        let view = NumberInputView(kind: .interval)
+        let view = NumberInputView(kind: .interval, defaultValue: 0)
         return view
     }()
     
@@ -71,7 +71,7 @@ class BasicViewController: UIViewController {
     }()
     
     private let effectAngleInputView: EffectAngleInputView = {
-        let view = EffectAngleInputView()
+        let view = EffectAngleInputView(defaultValue: 0)
         return view
     }()
     
@@ -122,6 +122,34 @@ class BasicViewController: UIViewController {
         stackView.addArrangedSubview(SpacerView(height: 36))
         
         shimmerView.startAnimating()
+        
+        bind()
+    }
+    
+    private func bind() {
+        baseColorInputView.bindValueDidUpdate { value in
+            print("Base Color: \(value)")
+        }
+        
+        highlightColorInputView.bindValueDidUpdate { value in
+            print("Highlight Color: \(value)")
+        }
+        
+        durationInputView.bindValueDidUpdate { value in
+            print("Duration: \(value)")
+        }
+        
+        intervalInputView.bindValueDidUpdate { value in
+            print("Duration: \(value)")
+        }
+        
+        effectSpanInputView.bindValueDidUpdate { value in
+            print("Effect Span: \(value)")
+        }
+        
+        effectAngleInputView.bindValueDidUpdate { value in
+            print("Effect Angle: \(value)")
+        }
     }
     
     @objc func keyboardWillShow(notification: Notification) {

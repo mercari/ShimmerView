@@ -1,6 +1,24 @@
 import UIKit
+import Combine
 
 class ColorInputView: UIView {
+    struct State: Equatable {
+        var r: Int
+        var g: Int
+        var b: Int
+        
+        init(color: UIColor) {
+            let components = color.components
+            r = Int(components.red*255)
+            g = Int(components.green*255)
+            b = Int(components.blue*255)
+        }
+        
+        var uiColor: UIColor {
+            UIColor(red: CGFloat(r)/255, green: CGFloat(g)/255, blue: CGFloat(b)/255, alpha: 1.0)
+        }
+    }
+    
     enum Kind {
         case base, highlight
         var titleString: String {
@@ -24,7 +42,6 @@ class ColorInputView: UIView {
     private lazy var colorCircleView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .red
         view.layer.cornerRadius = 4
         view.layer.masksToBounds = true
         NSLayoutConstraint.activate([
@@ -48,17 +65,17 @@ class ColorInputView: UIView {
     }()
     
     private lazy var rInputView: ColorElementInputView = {
-        let view = ColorElementInputView(kind: .r)
+        let view = ColorElementInputView(kind: .r, defaultValue: state.value.r)
         return view
     }()
     
     private lazy var gInputView: ColorElementInputView = {
-        let view = ColorElementInputView(kind: .g)
+        let view = ColorElementInputView(kind: .g, defaultValue: state.value.g)
         return view
     }()
     
     private lazy var bInputView: ColorElementInputView = {
-        let view = ColorElementInputView(kind: .b)
+        let view = ColorElementInputView(kind: .b, defaultValue: state.value.b)
         return view
     }()
     
@@ -71,7 +88,13 @@ class ColorInputView: UIView {
         return view
     }()
     
-    init(kind: Kind) {
+    private var valueDidUpdateClosure: ((UIColor) -> Void)?
+    private var state: CurrentValueSubject<State, Never>
+    private var disposeBag = DisposeBag()
+    
+    init(kind: Kind, defaultValue: UIColor) {
+        state = CurrentValueSubject(State(color: defaultValue))
+
         super.init(frame: .zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -93,20 +116,32 @@ class ColorInputView: UIView {
         stackView.addArrangedSubview(bInputView)
         stackView.addArrangedSubview(SpacerView(height: 16))
         
-        rInputView.bindValuDidChange { newRValue in
-            
+        rInputView.bindValuDidChange { [weak self] newValue in
+            self?.state.mutate(\.r, newValue)
         }
         
-        gInputView.bindValuDidChange { newGValue in
-            
+        gInputView.bindValuDidChange { [weak self] newValue in
+            self?.state.mutate(\.g, newValue)
         }
         
-        bInputView.bindValuDidChange { newBValue in
-            
+        bInputView.bindValuDidChange { [weak self] newValue in
+            self?.state.mutate(\.b, newValue)
         }
+        
+        state.removeDuplicates().sink { [weak self] output in
+            self?.colorCircleView.backgroundColor = output.uiColor
+        }.add(to: disposeBag)
+        
+        state.dropFirst().removeDuplicates().sink { [weak self] output in
+            self?.valueDidUpdateClosure?(output.uiColor)
+        }.add(to: disposeBag)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func bindValueDidUpdate(closure: @escaping (UIColor) -> Void) {
+        valueDidUpdateClosure = closure
     }
 }

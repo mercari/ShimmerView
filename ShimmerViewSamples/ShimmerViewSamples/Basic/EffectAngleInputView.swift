@@ -1,6 +1,19 @@
 import UIKit
+import Combine
 
 class EffectAngleInputView: UIView {
+    private static let maxCharacterCount: Int = 4
+    private var allowedCharSet: CharacterSet = {
+        var baseCharSet = CharacterSet.decimalDigits
+        baseCharSet.formUnion(CharacterSet(charactersIn: "."))
+        return baseCharSet
+    }()
+    private var numberFormatter: NumberFormatter = {
+        var formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
     
     private var titleLabel: UILabel = {
         let label = UILabel()
@@ -42,8 +55,9 @@ class EffectAngleInputView: UIView {
     private(set) lazy var textInputView: TextInputView = {
         let view = TextInputView()
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1.5)
+            view.widthAnchor.constraint(equalTo: view.heightAnchor, multiplier: 2.0)
         ])
+        view.textFiled.delegate = self
         return view
     }()
     
@@ -55,7 +69,12 @@ class EffectAngleInputView: UIView {
         return view
     }()
     
-    init() {
+    private var state: CurrentValueSubject<CGFloat, Never>
+    private var valueDidUpdateClosure: ((CGFloat) -> ())?
+    private var disposeBag = DisposeBag()
+    
+    init(defaultValue: CGFloat) {
+        state = CurrentValueSubject(max(min(CGFloat(defaultValue), 2), 0))
         super.init(frame: .zero)
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -71,9 +90,75 @@ class EffectAngleInputView: UIView {
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(inputBaseView)
         stackView.addArrangedSubview(SpacerView(height: 16))
+        
+        slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
+        slider.addTarget(self, action: #selector(sliderDidEndEditing), for: .touchUpInside)
+        slider.addTarget(self, action: #selector(sliderDidEndEditing), for: .touchUpOutside)
+        
+        bind()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func bind() {
+        state.sink { [weak self] value in
+            self?.textInputView.textFiled.text = self?.numberFormatter.string(for: value)
+        }.add(to: disposeBag)
+    }
+    
+    func bindValueDidUpdate(closure: @escaping (CGFloat) -> ()) {
+        self.valueDidUpdateClosure = closure
+    }
+    
+    @objc func sliderValueChanged() {
+        state.send(CGFloat(slider.value))
+    }
+    
+    @objc func sliderDidEndEditing() {
+        valueDidUpdateClosure?(state.value)
+    }
+}
+
+extension EffectAngleInputView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // if string count == 0, return true
+        guard string.count != 0 else {
+            return true
+        }
+        
+        // string should be consisted only from numbers
+        guard allowedCharSet.isSuperset(of: CharacterSet(charactersIn: string)) else {
+            return false
+        }
+    
+        // max length of the letters
+        guard ((textField.text ?? "") + string).count <= EffectAngleInputView.maxCharacterCount else {
+            return false
+        }
+        
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else {
+            return
+        }
+        
+        guard let convertedValue = Float(text) else {
+            textField.text = numberFormatter.string(for: state.value)
+            return
+        }
+        
+        state.send(max(min(CGFloat(convertedValue), 2), 0))
+        
+        valueDidUpdateClosure?(state.value)
+        return
     }
 }
