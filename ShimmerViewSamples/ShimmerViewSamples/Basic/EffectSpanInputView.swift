@@ -8,7 +8,7 @@ private extension ShimmerView.EffectSpan {
         case .points(let points):
             return points
         case .ratio(let ratio):
-            return ratio
+            return ratio*100
         }
     }
     
@@ -26,7 +26,7 @@ private extension ShimmerView.EffectSpan {
         case .points:
             self = .points(number)
         case .ratio:
-            self = .ratio(number)
+            self = .ratio(number*0.01)
         }
     }
     
