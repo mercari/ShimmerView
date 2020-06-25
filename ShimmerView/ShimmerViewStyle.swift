@@ -7,22 +7,17 @@ public extension ShimmerView {
     }
 }
 
-public protocol ShimmerViewStyle {
-    var baseColor: UIColor { get }
-    var highlightColor: UIColor { get }
-    var duration: CFTimeInterval { get }
-    var interval: CFTimeInterval { get }
-    var effectSpan: ShimmerView.EffectSpan { get }
+public struct ShimmerViewStyle: Equatable {
+    public var baseColor: UIColor
+    public var highlightColor: UIColor
+    public var duration: CFTimeInterval
+    public var interval: CFTimeInterval
+    public var effectSpan: ShimmerView.EffectSpan
 
     /// The tilt angle of the effect. Please specify using radian.
-    var effectAngle: CGFloat { get }
+    public var effectAngle: CGFloat
 }
 
-internal struct DefaultShimmerViewStyle: ShimmerViewStyle {
-    let baseColor: UIColor = .systemGray2
-    let highlightColor: UIColor = .systemGray3
-    let duration: CFTimeInterval = 1.2
-    let interval: CFTimeInterval = 0.4
-    let effectSpan: ShimmerView.EffectSpan = .points(120)
-    let effectAngle: CGFloat = 0
+public extension ShimmerViewStyle {
+    static let `default` = ShimmerViewStyle(baseColor: .systemGray2, highlightColor: .systemGray3, duration: 1.2, interval: 0.4, effectSpan: .points(120), effectAngle: 0 * CGFloat.pi)
 }

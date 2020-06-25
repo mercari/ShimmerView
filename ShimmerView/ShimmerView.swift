@@ -11,7 +11,7 @@ open class ShimmerView: UIView, ShimmerSyncTarget, ShimmerReplicatorViewCell {
         return layer
     }()
 
-    public private(set) var style: ShimmerViewStyle = DefaultShimmerViewStyle()
+    public private(set) var style: ShimmerViewStyle = .default
 
     private(set) var isAnimating: Bool = false
 
@@ -47,9 +47,7 @@ open class ShimmerView: UIView, ShimmerSyncTarget, ShimmerReplicatorViewCell {
 
         let animator = Animator(shimmerView: self)
 
-        if gradientLayer.colors == nil {
-            gradientLayer.colors = animator.interpolatedColors
-        }
+        gradientLayer.colors = animator.interpolatedColors
 
         gradientLayer.add(animator.gradientLayerAnimation, forKey: ShimmerView.animationKey)
     }

@@ -49,7 +49,9 @@ internal extension ShimmerView {
         
         lazy var effectRadius: CGFloat = {
             let baseAngle = atan(syncTarget.syncTargetView.frame.height / syncTarget.syncTargetView.frame.width)
-            return abs(cos(baseAngle - syncTarget.style.effectAngle)*syncTarget.effectRadius)
+            let first = abs(cos(baseAngle - syncTarget.style.effectAngle))*syncTarget.effectRadius
+            let second = abs(cos(baseAngle - syncTarget.style.effectAngle+CGFloat.pi*0.5))*syncTarget.effectRadius
+            return max(first, second)
         }()
         
         var vectorFromViewCenterToStartPointFrom: CGVector {

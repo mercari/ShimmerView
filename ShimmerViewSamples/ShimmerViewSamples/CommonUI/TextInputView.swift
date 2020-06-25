@@ -15,7 +15,7 @@ class TextInputView: UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        backgroundColor = .tertiarySystemBackground
+        backgroundColor = .secondarySystemBackground
         layer.cornerRadius = 4
         layer.masksToBounds = true
         

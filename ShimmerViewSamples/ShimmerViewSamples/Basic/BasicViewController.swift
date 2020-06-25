@@ -9,6 +9,7 @@ class BasicViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.keyboardDismissMode = .onDrag
+        scrollView.backgroundColor = .systemBackground
         return scrollView
     }()
     
@@ -45,40 +46,51 @@ class BasicViewController: UIViewController {
         return view
     }()
     
-    private let baseColorInputView: ColorInputView = {
-        let view = ColorInputView(kind: .base, defaultValue: .magenta)
+    private lazy var baseColorInputView: ColorInputView = {
+        let view = ColorInputView(kind: .base, defaultValue: viewModel.state.value.baseColor)
         return view
     }()
     
-    private let highlightColorInputView: ColorInputView = {
-        let view = ColorInputView(kind: .highlight, defaultValue: .magenta)
+    private lazy var highlightColorInputView: ColorInputView = {
+        let view = ColorInputView(kind: .highlight, defaultValue: viewModel.state.value.highlightColor)
         return view
     }()
     
-    private let durationInputView: NumberInputView = {
-        let view = NumberInputView(kind: .duration, defaultValue: 0)
+    private lazy var durationInputView: NumberInputView = {
+        let view = NumberInputView(kind: .duration, defaultValue: CGFloat(viewModel.state.value.duration))
         return view
     }()
     
-    private let intervalInputView: NumberInputView = {
-        let view = NumberInputView(kind: .interval, defaultValue: 0)
+    private lazy var intervalInputView: NumberInputView = {
+        let view = NumberInputView(kind: .interval, defaultValue: CGFloat(viewModel.state.value.interval))
         return view
     }()
     
-    private let effectSpanInputView: EffectSpanInputView = {
-        let view = EffectSpanInputView(effectSpan: .points(120))
+    private lazy var effectSpanInputView: EffectSpanInputView = {
+        let view = EffectSpanInputView(effectSpan: viewModel.state.value.effectSpan)
         return view
     }()
     
-    private let effectAngleInputView: EffectAngleInputView = {
-        let view = EffectAngleInputView(defaultValue: 0)
+    private lazy var effectAngleInputView: EffectAngleInputView = {
+        let view = EffectAngleInputView(defaultValue: viewModel.state.value.effectAngle)
         return view
     }()
+    
+    private var viewModel: ViewModel
+    
+    init() {
+        self.viewModel = ViewModel()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .secondarySystemBackground
         
         // Notification
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -87,9 +99,13 @@ class BasicViewController: UIViewController {
         view.addSubview(scrollView)
         NSLayoutConstraint.activate([
             scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.frameLayoutGuide.leftAnchor.constraint(equalTo: view.leftAnchor),
-            scrollView.frameLayoutGuide.rightAnchor.constraint(equalTo: view.rightAnchor),
+            scrollView.widthAnchor.constraint(lessThanOrEqualToConstant: 600),
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+        let secondry = scrollView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        secondry.priority = .defaultHigh
+        secondry.isActive = true
+        
         constrationForScrollViewBottom = scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         constrationForScrollViewBottom?.isActive = true
         
@@ -99,7 +115,7 @@ class BasicViewController: UIViewController {
             stackView.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor),
             stackView.rightAnchor.constraint(equalTo: scrollView.contentLayoutGuide.rightAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.widthAnchor)
+            stackView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
         ])
         
         stackView.addArrangedSubview(SpacerView(height: 36))
@@ -127,28 +143,32 @@ class BasicViewController: UIViewController {
     }
     
     private func bind() {
-        baseColorInputView.bindValueDidUpdate { value in
-            print("Base Color: \(value)")
+        viewModel.bindStyleDidUpdate { [weak self] style in
+            self?.shimmerView.apply(style: style)
         }
         
-        highlightColorInputView.bindValueDidUpdate { value in
-            print("Highlight Color: \(value)")
+        baseColorInputView.bindValueDidUpdate { [weak self] value in
+            self?.viewModel.baseColorDidUpdate(color: value)
         }
         
-        durationInputView.bindValueDidUpdate { value in
-            print("Duration: \(value)")
+        highlightColorInputView.bindValueDidUpdate { [weak self] value in
+            self?.viewModel.highlightColorDidUpdate(color: value)
         }
         
-        intervalInputView.bindValueDidUpdate { value in
-            print("Duration: \(value)")
+        durationInputView.bindValueDidUpdate { [weak self] value in
+            self?.viewModel.durationDidUpdate(duration: value)
         }
         
-        effectSpanInputView.bindValueDidUpdate { value in
-            print("Effect Span: \(value)")
+        intervalInputView.bindValueDidUpdate { [weak self] value in
+            self?.viewModel.intervalDidUpdate(interval: value)
         }
         
-        effectAngleInputView.bindValueDidUpdate { value in
-            print("Effect Angle: \(value)")
+        effectSpanInputView.bindValueDidUpdate { [weak self] value in
+            self?.viewModel.effectSpanDidUpdate(effectSpan: value)
+        }
+        
+        effectAngleInputView.bindValueDidUpdate { [weak self] value in
+            self?.viewModel.effectAngleDidUpdate(effectAngle: value)
         }
     }
     
