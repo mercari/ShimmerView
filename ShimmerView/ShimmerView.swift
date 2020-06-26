@@ -2,8 +2,6 @@ import Foundation
 import UIKit
 
 open class ShimmerView: UIView, ShimmerSyncTarget, ShimmerReplicatorViewCell {
-    public typealias Input = Void
-
     internal static let animationKey = "ShimmerEffect"
 
     private(set) var gradientLayer: CAGradientLayer = {

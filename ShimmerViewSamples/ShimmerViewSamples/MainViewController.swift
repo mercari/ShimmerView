@@ -28,17 +28,19 @@ class MainViewController: UITableViewController {
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
+        tableView.rowHeight = 56
         
         dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, data) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
             cell.textLabel?.text = data.titleString
+            cell.textLabel?.font = .preferredFont(forTextStyle: .body)
             return cell
         })
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.appendSections([.main])
         snapshot.appendItems([.basic, .list])
-        dataSource?.apply(snapshot)
+        dataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
 

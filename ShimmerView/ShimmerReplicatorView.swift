@@ -1,18 +1,10 @@
 import UIKit
 
 public protocol ShimmerReplicatorViewCell: UIView {
-    associatedtype Input
-    init(with input: Input)
     func startAnimating()
 }
 
-extension ShimmerReplicatorViewCell where Input == Void {
-    public init(with input: Input) {
-        self.init(frame: .zero)
-    }
-}
-
-public class ShimmerReplicatorView<Cell: ShimmerReplicatorViewCell>: UIView {
+public class ShimmerReplicatorView: UIView {
 
     public enum ItemSize {
         case fixedSize(CGSize)
@@ -60,23 +52,23 @@ public class ShimmerReplicatorView<Cell: ShimmerReplicatorViewCell>: UIView {
 
     private(set) var isAnimating: Bool = false
 
-    private let cellInput: Cell.Input
     public private(set) var itemSize: ItemSize
     public private(set) var interitemSpacing: CGFloat
     public private(set) var lineSpacing: CGFloat
     public private(set) var inset: UIEdgeInsets
     public private(set) var horizontalEdgeMode: EdgeMode
     public private(set) var verticalEdgeMode: EdgeMode
-
-    public init(cellInput: Cell.Input, itemSize: ItemSize, interitemSpacing: CGFloat = 0, lineSpacing: CGFloat = 0, inset: UIEdgeInsets = .zero, horizontalEdgeMode: EdgeMode = .beyond, verticalEdgeMode: EdgeMode = .beyond) {
-        self.cellInput = cellInput
+    private let cellProvider: () -> ShimmerReplicatorViewCell
+    
+    public init(itemSize: ItemSize, interitemSpacing: CGFloat = 0, lineSpacing: CGFloat = 0, inset: UIEdgeInsets = .zero, horizontalEdgeMode: EdgeMode = .beyond, verticalEdgeMode: EdgeMode = .beyond, cellProvider: @escaping () -> ShimmerReplicatorViewCell) {
         self.itemSize = itemSize
         self.interitemSpacing = interitemSpacing
         self.lineSpacing = lineSpacing
         self.inset = inset
         self.horizontalEdgeMode = horizontalEdgeMode
         self.verticalEdgeMode = verticalEdgeMode
-
+        self.cellProvider = cellProvider
+        
         super.init(frame: .zero)
 
         addSubview(stackView)
@@ -147,7 +139,7 @@ public class ShimmerReplicatorView<Cell: ShimmerReplicatorViewCell>: UIView {
         let currentCount = stackView.arrangedSubviews.count
         if currentCount < Int(horizontalNumber) {
             for _ in 0..<(Int(horizontalNumber)-currentCount) {
-                let newCell = Cell(with: cellInput)
+                let newCell = cellProvider()
                 newCell.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                     newCell.widthAnchor.constraint(equalToConstant: itemSize.width),
@@ -169,14 +161,8 @@ public class ShimmerReplicatorView<Cell: ShimmerReplicatorViewCell>: UIView {
 
     public func startAnimating() {
         isAnimating = true
-        stackView.arrangedSubviews.compactMap { $0 as? Cell }.forEach {
+        stackView.arrangedSubviews.compactMap { $0 as? ShimmerReplicatorViewCell }.forEach {
             $0.startAnimating()
         }
-    }
-}
-
-extension ShimmerReplicatorView where Cell.Input == Void {
-    public convenience init(itemSize: ItemSize, interitemSpacing: CGFloat = 0, lineSpacing: CGFloat = 0, inset: UIEdgeInsets = .zero) {
-        self.init(cellInput: (), itemSize: itemSize, interitemSpacing: interitemSpacing, lineSpacing: lineSpacing, inset: inset)
     }
 }
