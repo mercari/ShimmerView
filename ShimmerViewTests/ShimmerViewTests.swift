@@ -1,34 +1,97 @@
-//
-//  ShimmerViewTests.swift
-//  ShimmerViewTests
-//
-//  Created by Masaki Haga on 2020/06/15.
-//  Copyright © 2020 Mercari. All rights reserved.
-//
-
 import XCTest
 @testable import ShimmerView
 
 class ShimmerViewTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testStartAnimating() {
+        let shimmerView = ShimmerView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+    
+        XCTAssertEqual(shimmerView.effectBeginTime, 0)
+        XCTAssertFalse(shimmerView.isAnimating)
+        XCTAssertNil(shimmerView.gradientLayer.colors)
+        XCTAssertNil(shimmerView.gradientLayer.animation(forKey: ShimmerView.animationKey))
+        
+        shimmerView.startAnimating()
+        
+        XCTAssertNotEqual(shimmerView.effectBeginTime, 0)
+        XCTAssertTrue(shimmerView.isAnimating)
+        XCTAssertNotNil(shimmerView.gradientLayer.colors)
+        XCTAssertNotNil(shimmerView.gradientLayer.animation(forKey: ShimmerView.animationKey))
+        
+        sleep(1)
+        
+        let previousEffectBeginTime = shimmerView.effectBeginTime
+        
+        /// effectBeginTime should be updated everytime `startAnimating` is called.
+        shimmerView.startAnimating()
+        XCTAssertNotEqual(shimmerView.effectBeginTime, previousEffectBeginTime)
+        XCTAssertTrue(shimmerView.isAnimating)
+        XCTAssertNotNil(shimmerView.gradientLayer.colors)
+        XCTAssertNotNil(shimmerView.gradientLayer.animation(forKey: ShimmerView.animationKey))
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testStopAnimating() {
+        let shimmerView = ShimmerView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+    
+        XCTAssertEqual(shimmerView.effectBeginTime, 0)
+        XCTAssertFalse(shimmerView.isAnimating)
+        XCTAssertNil(shimmerView.gradientLayer.colors)
+        XCTAssertNil(shimmerView.gradientLayer.animation(forKey: ShimmerView.animationKey))
+        
+        shimmerView.startAnimating()
+        
+        shimmerView.stopAnimating()
+        XCTAssertFalse(shimmerView.isAnimating)
+        XCTAssertNil(shimmerView.gradientLayer.colors)
+        XCTAssertNil(shimmerView.gradientLayer.animation(forKey: ShimmerView.animationKey))
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testApplyStyle() {
+        let shimmerView = ShimmerView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        let customStyle = ShimmerViewStyle(baseColor: .red, highlightColor: .blue, duration: 1.0, interval: 1.0, effectSpan: .points(100), effectAngle: 0)
+        
+        // ShimmerView's default style is ShimmerViewStyle.default
+        XCTAssertEqual(shimmerView.style, ShimmerViewStyle.default)
+        
+        XCTContext.runActivity(named: "Apply a new style before animation is started") { _ in
+            shimmerView.apply(style: customStyle)
+            
+            XCTAssertEqual(shimmerView.style, customStyle)
+            XCTAssertFalse(shimmerView.isAnimating)
+            XCTAssertNil(shimmerView.gradientLayer.colors)
+            XCTAssertNil(shimmerView.gradientLayer.animation(forKey: ShimmerView.animationKey))
+        }
+        
+        sleep(1)
+        
+        shimmerView.startAnimating()
+        let effectBeginTime = shimmerView.effectBeginTime
+        
+        XCTContext.runActivity(named: "Apply a new style after animation is started") { _ in
+            shimmerView.apply(style: customStyle)
+            
+            XCTAssertEqual(shimmerView.style, customStyle)
+            XCTAssertEqual(shimmerView.effectBeginTime, effectBeginTime)
         }
     }
-
+    
+    func testLayoutSubviews() {
+        let shimmerView = ShimmerView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        
+        XCTAssertEqual(shimmerView.gradientLayer.frame.width, shimmerView.gradientLayer.frame.height)
+        
+        XCTContext.runActivity(named: "Height is bigger") { _ in
+            shimmerView.frame.size = CGSize(width: 100, height: 300)
+            shimmerView.layoutSubviews()
+            XCTAssertEqual(shimmerView.gradientLayer.frame.origin, CGPoint(x: -100, y: 0))
+            XCTAssertEqual(shimmerView.gradientLayer.frame.width, shimmerView.gradientLayer.frame.height)
+        }
+        
+        XCTContext.runActivity(named: "Width is bigger") { _ in
+            shimmerView.frame.size = CGSize(width: 300, height: 100)
+            shimmerView.layoutSubviews()
+            XCTAssertEqual(shimmerView.gradientLayer.frame.origin, CGPoint(x: 0, y: -100))
+            XCTAssertEqual(shimmerView.gradientLayer.frame.width, shimmerView.gradientLayer.frame.height)
+        }
+    }
 }

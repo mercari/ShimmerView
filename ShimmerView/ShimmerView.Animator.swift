@@ -47,6 +47,12 @@ internal extension ShimmerView {
             return colors.map { $0.cgColor }
         }
         
+        /// Effect Radius
+        /// LineA: A line passing through the center of the sync target view with angle EffectAngle.
+        /// VertexB: One closest vertex of sync target view frame from LineA.
+        /// LineC: A line passing through VertexB and intersects vertically with LineA.
+        /// PointD: The intersection point of LineA and LineC.
+        /// Effect Radius: The distance between the center of the sync target view and PointD
         lazy var effectRadius: CGFloat = {
             let baseAngle = atan(syncTarget.syncTargetView.frame.height / syncTarget.syncTargetView.frame.width)
             let first = abs(cos(baseAngle - syncTarget.style.effectAngle))*syncTarget.effectRadius
