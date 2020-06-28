@@ -13,15 +13,6 @@ class ListViewCell: UIView, ShimmerReplicatorViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        firstLineView.layer.cornerRadius = firstLineView.frame.height/2
-        firstLineView.layer.masksToBounds = true
-        
-        secondLineView.layer.cornerRadius = secondLineView.frame.height/2
-        secondLineView.layer.masksToBounds = true
-        
-        thirdLineView.layer.cornerRadius = thirdLineView.frame.height/2
-        thirdLineView.layer.masksToBounds = true
     }
     
     func startAnimating() {

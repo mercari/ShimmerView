@@ -14,31 +14,38 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-AU-Idf" userLabel="Thumbnail View" customClass="ShimmerView" customModule="ShimmerView">
                     <rect key="frame" x="16" y="16" width="88" height="88"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Ijl-AU-Idf" secondAttribute="height" multiplier="1:1" id="t0D-uQ-y2R"/>
                         <constraint firstAttribute="width" constant="88" id="tKj-CS-mQW"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uk4-Zg-et2" userLabel="First Line View" customClass="ShimmerView" customModule="ShimmerView">
-                    <rect key="frame" x="120" y="16" width="264" height="20"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="120" y="16" width="264" height="16"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="4iL-oi-FuC"/>
+                        <constraint firstAttribute="height" constant="16" id="4iL-oi-FuC"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOz-O8-QFA" userLabel="Second Line View" customClass="ShimmerView" customModule="ShimmerView">
-                    <rect key="frame" x="120" y="44" width="264" height="20"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="120" y="40" width="264" height="16"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="wjo-xs-ydH"/>
+                        <constraint firstAttribute="height" constant="16" id="wjo-xs-ydH"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2E-9m-kaf" userLabel="Third Line View" customClass="ShimmerView" customModule="ShimmerView">
-                    <rect key="frame" x="120" y="72" width="88" height="20"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="120" y="64" width="88" height="16"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="LxG-Kg-Q6Z"/>
+                        <constraint firstAttribute="height" constant="16" id="LxG-Kg-Q6Z"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEb-Mp-bUN" userLabel="Seperator">
+                    <rect key="frame" x="0.0" y="119" width="400" height="1"/>
+                    <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="PAq-SL-r7x"/>
                     </constraints>
                 </view>
             </subviews>
@@ -49,10 +56,13 @@
                 <constraint firstAttribute="trailing" secondItem="dOz-O8-QFA" secondAttribute="trailing" constant="16" id="4mv-zC-KKp"/>
                 <constraint firstItem="Ijl-AU-Idf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="CIM-2g-NaD"/>
                 <constraint firstItem="Uk4-Zg-et2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="FqN-ki-M6b"/>
+                <constraint firstItem="tEb-Mp-bUN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JLQ-GP-NVL"/>
                 <constraint firstItem="Ijl-AU-Idf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Lle-he-LDK"/>
                 <constraint firstItem="dOz-O8-QFA" firstAttribute="top" secondItem="Uk4-Zg-et2" secondAttribute="bottom" constant="8" id="Ozt-Cj-wHA"/>
                 <constraint firstItem="N2E-9m-kaf" firstAttribute="leading" secondItem="Ijl-AU-Idf" secondAttribute="trailing" constant="16" id="ZHc-cb-bnf"/>
+                <constraint firstAttribute="bottom" secondItem="tEb-Mp-bUN" secondAttribute="bottom" id="cbq-wX-kXd"/>
                 <constraint firstItem="Uk4-Zg-et2" firstAttribute="leading" secondItem="Ijl-AU-Idf" secondAttribute="trailing" constant="16" id="hbz-gy-2yb"/>
+                <constraint firstAttribute="trailing" secondItem="tEb-Mp-bUN" secondAttribute="trailing" id="lKO-7R-NB8"/>
                 <constraint firstItem="N2E-9m-kaf" firstAttribute="top" secondItem="dOz-O8-QFA" secondAttribute="bottom" constant="8" id="sI4-w4-HCo"/>
                 <constraint firstItem="N2E-9m-kaf" firstAttribute="width" secondItem="dOz-O8-QFA" secondAttribute="width" multiplier="0.3333" id="vyF-xa-s88"/>
             </constraints>

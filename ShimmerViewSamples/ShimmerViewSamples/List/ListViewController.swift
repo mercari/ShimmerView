@@ -3,7 +3,17 @@ import ShimmerView
 
 class ListViewController: UIViewController, ShimmerSyncTarget {
     
-    var style = ShimmerViewStyle(baseColor: .red, highlightColor: .blue, duration: 1.2, interval: 0, effectSpan: .points(120), effectAngle: 0)
+    var style: ShimmerViewStyle = {
+        var style = ShimmerViewStyle.default
+        style.baseColor = UIColor(dynamicProvider: { trait -> UIColor in
+            if trait.userInterfaceStyle == .dark {
+                return UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
+            } else {
+                return UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0)
+            }
+        })
+        return style
+    }()
     var effectBeginTime = CACurrentMediaTime()
     
     private var shimmerReplicatorView: ShimmerReplicatorView = {
@@ -24,6 +34,8 @@ class ListViewController: UIViewController, ShimmerSyncTarget {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .systemBackground
         
         view.addSubview(shimmerReplicatorView)
         NSLayoutConstraint.activate([

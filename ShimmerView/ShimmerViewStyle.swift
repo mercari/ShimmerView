@@ -28,5 +28,5 @@ public struct ShimmerViewStyle: Equatable {
 }
 
 public extension ShimmerViewStyle {
-    static let `default` = ShimmerViewStyle(baseColor: .systemGray2, highlightColor: .systemGray3, duration: 1.2, interval: 0.4, effectSpan: .points(120), effectAngle: 0 * CGFloat.pi)
+    static let `default` = ShimmerViewStyle(baseColor: UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0), highlightColor: UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0), duration: 1.2, interval: 0.4, effectSpan: .points(120), effectAngle: 0 * CGFloat.pi)
 }
