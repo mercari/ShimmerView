@@ -2,19 +2,67 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ListViewCell" customModule="ShimmerViewSamples" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-AU-Idf" userLabel="Thumbnail View" customClass="ShimmerView" customModule="ShimmerView">
+                    <rect key="frame" x="16" y="16" width="88" height="88"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Ijl-AU-Idf" secondAttribute="height" multiplier="1:1" id="t0D-uQ-y2R"/>
+                        <constraint firstAttribute="width" constant="88" id="tKj-CS-mQW"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uk4-Zg-et2" userLabel="First Line View" customClass="ShimmerView" customModule="ShimmerView">
+                    <rect key="frame" x="120" y="16" width="264" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="4iL-oi-FuC"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOz-O8-QFA" userLabel="Second Line View" customClass="ShimmerView" customModule="ShimmerView">
+                    <rect key="frame" x="120" y="44" width="264" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="wjo-xs-ydH"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2E-9m-kaf" userLabel="Third Line View" customClass="ShimmerView" customModule="ShimmerView">
+                    <rect key="frame" x="120" y="72" width="88" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="LxG-Kg-Q6Z"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Uk4-Zg-et2" secondAttribute="trailing" constant="16" id="3rR-Yw-bLw"/>
+                <constraint firstItem="dOz-O8-QFA" firstAttribute="leading" secondItem="Ijl-AU-Idf" secondAttribute="trailing" constant="16" id="4PN-55-add"/>
+                <constraint firstAttribute="trailing" secondItem="dOz-O8-QFA" secondAttribute="trailing" constant="16" id="4mv-zC-KKp"/>
+                <constraint firstItem="Ijl-AU-Idf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="CIM-2g-NaD"/>
+                <constraint firstItem="Uk4-Zg-et2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="FqN-ki-M6b"/>
+                <constraint firstItem="Ijl-AU-Idf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Lle-he-LDK"/>
+                <constraint firstItem="dOz-O8-QFA" firstAttribute="top" secondItem="Uk4-Zg-et2" secondAttribute="bottom" constant="8" id="Ozt-Cj-wHA"/>
+                <constraint firstItem="N2E-9m-kaf" firstAttribute="leading" secondItem="Ijl-AU-Idf" secondAttribute="trailing" constant="16" id="ZHc-cb-bnf"/>
+                <constraint firstItem="Uk4-Zg-et2" firstAttribute="leading" secondItem="Ijl-AU-Idf" secondAttribute="trailing" constant="16" id="hbz-gy-2yb"/>
+                <constraint firstItem="N2E-9m-kaf" firstAttribute="top" secondItem="dOz-O8-QFA" secondAttribute="bottom" constant="8" id="sI4-w4-HCo"/>
+                <constraint firstItem="N2E-9m-kaf" firstAttribute="width" secondItem="dOz-O8-QFA" secondAttribute="width" multiplier="0.3333" id="vyF-xa-s88"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="firstLineView" destination="Uk4-Zg-et2" id="5CG-9q-AHS"/>
+                <outlet property="secondLineView" destination="dOz-O8-QFA" id="fdN-KG-vGT"/>
+                <outlet property="thirdLineView" destination="N2E-9m-kaf" id="ug7-48-DpG"/>
+                <outlet property="thumbnailView" destination="Ijl-AU-Idf" id="cHE-Sd-MgL"/>
+            </connections>
             <point key="canvasLocation" x="4.3478260869565224" y="-213.61607142857142"/>
         </view>
     </objects>

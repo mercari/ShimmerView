@@ -6,7 +6,7 @@ class MainViewController: UITableViewController {
         case main
     }
     
-    enum Row {
+    enum Row: CaseIterable {
         case basic, list
         
         var titleString: String {
@@ -39,15 +39,21 @@ class MainViewController: UITableViewController {
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
         snapshot.appendSections([.main])
-        snapshot.appendItems([.basic, .list])
+        snapshot.appendItems(Row.allCases)
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
 
 extension MainViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = BasicViewController()
-        
-        navigationController?.pushViewController(vc, animated: true)
+        switch Row.allCases[indexPath.row] {
+        case .basic:
+            let vc = BasicViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .list:
+            let vc = ListViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

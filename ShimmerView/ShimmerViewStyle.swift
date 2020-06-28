@@ -16,6 +16,15 @@ public struct ShimmerViewStyle: Equatable {
 
     /// The tilt angle of the effect. Please specify using radian.
     public var effectAngle: CGFloat
+    
+    public init(baseColor: UIColor, highlightColor: UIColor, duration: CFTimeInterval, interval: CFTimeInterval, effectSpan: ShimmerView.EffectSpan, effectAngle: CGFloat) {
+        self.baseColor = baseColor
+        self.highlightColor = highlightColor
+        self.duration = duration
+        self.interval = interval
+        self.effectSpan = effectSpan
+        self.effectAngle = effectAngle
+    }
 }
 
 public extension ShimmerViewStyle {

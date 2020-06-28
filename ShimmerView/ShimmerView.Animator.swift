@@ -55,9 +55,18 @@ internal extension ShimmerView {
         /// Effect Radius: The distance between the center of the sync target view and PointD
         lazy var effectRadius: CGFloat = {
             let baseAngle = atan(syncTarget.syncTargetView.frame.height / syncTarget.syncTargetView.frame.width)
-            let first = abs(cos(baseAngle - syncTarget.style.effectAngle))*syncTarget.effectRadius
-            let second = abs(cos(baseAngle - syncTarget.style.effectAngle+CGFloat.pi*0.5))*syncTarget.effectRadius
-            return max(first, second)
+            var effectAngle = syncTarget.style.effectAngle.truncatingRemainder(dividingBy: .pi)
+            while effectAngle < 0 {
+                effectAngle += .pi * 2
+            }
+            effectAngle = effectAngle.truncatingRemainder(dividingBy: .pi)
+            
+            switch true {
+            case effectAngle<CGFloat.pi*0.5:
+                return abs(cos(baseAngle - effectAngle))*syncTarget.effectRadius
+            default:
+                return abs(cos(baseAngle - effectAngle+CGFloat.pi*0.5))*syncTarget.effectRadius
+            }
         }()
         
         var vectorFromViewCenterToStartPointFrom: CGVector {
