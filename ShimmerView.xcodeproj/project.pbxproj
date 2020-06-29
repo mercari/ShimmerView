@@ -13,6 +13,7 @@
 		3D17752524A06AE600A4C7B5 /* ShimmerView.Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17752424A06AE600A4C7B5 /* ShimmerView.Animator.swift */; };
 		3D17755524A0B22D00A4C7B5 /* ShimmerViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17755424A0B22D00A4C7B5 /* ShimmerViewStyle.swift */; };
 		3D49EE9B24A5B242007F0C60 /* ShimmerViewAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49EE9A24A5B242007F0C60 /* ShimmerViewAnimatorTests.swift */; };
+		3D49EEA624A977E6007F0C60 /* ShimmerReplicatorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49EEA524A977E6007F0C60 /* ShimmerReplicatorViewCell.swift */; };
 		3DF13EF7249792D8005675B8 /* ShimmerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DF13EED249792D8005675B8 /* ShimmerView.framework */; };
 		3DF13EFC249792D9005675B8 /* ShimmerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF13EFB249792D9005675B8 /* ShimmerViewTests.swift */; };
 		3DF13EFE249792D9005675B8 /* ShimmerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DF13EF0249792D8005675B8 /* ShimmerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,6 +40,7 @@
 		3D17752424A06AE600A4C7B5 /* ShimmerView.Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.Animator.swift; sourceTree = "<group>"; };
 		3D17755424A0B22D00A4C7B5 /* ShimmerViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerViewStyle.swift; sourceTree = "<group>"; };
 		3D49EE9A24A5B242007F0C60 /* ShimmerViewAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerViewAnimatorTests.swift; sourceTree = "<group>"; };
+		3D49EEA524A977E6007F0C60 /* ShimmerReplicatorViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerReplicatorViewCell.swift; sourceTree = "<group>"; };
 		3DF13EED249792D8005675B8 /* ShimmerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShimmerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF13EF0249792D8005675B8 /* ShimmerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShimmerView.h; sourceTree = "<group>"; };
 		3DF13EF1249792D8005675B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				3DF13F0924979381005675B8 /* ShimmerSyncTarget.swift */,
 				3DF13F0B249793BC005675B8 /* ShimmerReplicatorView.swift */,
 				3D17752424A06AE600A4C7B5 /* ShimmerView.Animator.swift */,
+				3D49EEA524A977E6007F0C60 /* ShimmerReplicatorViewCell.swift */,
 			);
 			path = ShimmerView;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				3D17752124A0608100A4C7B5 /* CGRect+Extensions.swift in Sources */,
 				3D17752524A06AE600A4C7B5 /* ShimmerView.Animator.swift in Sources */,
 				3D17751F24A0604C00A4C7B5 /* UIResponder+Extensions.swift in Sources */,
+				3D49EEA624A977E6007F0C60 /* ShimmerReplicatorViewCell.swift in Sources */,
 				3DF13F0E24979436005675B8 /* UIColor+Extensions.swift in Sources */,
 				3D17755524A0B22D00A4C7B5 /* ShimmerViewStyle.swift in Sources */,
 			);

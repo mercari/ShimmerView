@@ -1,6 +1,10 @@
 import UIKit
 
 public extension ShimmerView {
+    
+    /// Effect Span
+    /// Effect Span is the length of the gradation of shimmering effect.
+    /// If it is specified in ratio, the effect span in points will be calculated as SyncTargetView.frame.diagonalDistance * ratio.
     enum EffectSpan: Equatable {
         case ratio(CGFloat)
         case points(CGFloat)
@@ -8,10 +12,20 @@ public extension ShimmerView {
 }
 
 public struct ShimmerViewStyle: Equatable {
+    
+    /// The base color of the skelton view/shimmering effect.
     public var baseColor: UIColor
+    
+    /// The highlight color of the shimmering effect.
     public var highlightColor: UIColor
+    
+    /// The duration of the shimmering effect.
     public var duration: CFTimeInterval
+    
+    /// The interval of the shimmering effect. The length of one repetition of shimmering effect will be `duration` + `interval`.
     public var interval: CFTimeInterval
+    
+    /// The length of the gradation of shimmering effect.
     public var effectSpan: ShimmerView.EffectSpan
 
     /// The tilt angle of the effect. Please specify using radian.

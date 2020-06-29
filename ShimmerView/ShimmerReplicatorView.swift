@@ -1,9 +1,8 @@
 import UIKit
 
-public protocol ShimmerReplicatorViewCell: UIView {
-    func startAnimating()
-}
-
+/// ShimmerReplicatorView
+/// This class replicates the specified `ShimmerReplicatorViewCell` inside its frame in horizontal and vertical direction.
+/// This class make it easy to create list type loading indicator very easily.
 public class ShimmerReplicatorView: UIView {
 
     public enum ItemSize {
@@ -60,6 +59,16 @@ public class ShimmerReplicatorView: UIView {
     public private(set) var verticalEdgeMode: EdgeMode
     private let cellProvider: () -> ShimmerReplicatorViewCell
     
+    
+    /// Initializer
+    /// - Parameters:
+    ///   - itemSize: The size of each cells.
+    ///   - interitemSpacing: The spacing between items in a same row.
+    ///   - lineSpacing: The spacing between rows.
+    ///   - inset: Inset for the contents.
+    ///   - horizontalEdgeMode: The edge mode for the horizontal direction.
+    ///   - verticalEdgeMode: The edge mode for the vertical direction.
+    ///   - cellProvider: A closure to create an instance of `ShimmerReplicatorViewCell`.
     public init(itemSize: ItemSize, interitemSpacing: CGFloat = 0, lineSpacing: CGFloat = 0, inset: UIEdgeInsets = .zero, horizontalEdgeMode: EdgeMode = .beyond, verticalEdgeMode: EdgeMode = .beyond, cellProvider: @escaping () -> ShimmerReplicatorViewCell) {
         self.itemSize = itemSize
         self.interitemSpacing = interitemSpacing
