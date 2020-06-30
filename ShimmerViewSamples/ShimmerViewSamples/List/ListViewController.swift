@@ -9,7 +9,7 @@ class ListViewController: UIViewController, ShimmerSyncTarget {
             if trait.userInterfaceStyle == .dark {
                 return UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
             } else {
-                return UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0)
+                return UIColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1.0)
             }
         })
         return style
