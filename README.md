@@ -51,6 +51,8 @@ To make the best effect, create a view or view controller that contains multiple
 ### ShimmerReplicatorView & ShimmerReplicatorViewCell
 `ShimmerReplicatorView` will let you create a list type loading screen with a few lines of code.
 
+![ShimmerViewList](images/shimmer_view_list.gif)
+
 ```swift
 let replicatorView = ShimmerReplicatorView(
     itemSize: .fixedSize(CGSize(width: 80, height: 80)),
