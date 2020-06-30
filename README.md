@@ -19,7 +19,7 @@ Shimmer Effect has four related APIs as blow:
 - `ShimmerReplicatorView`
 - `ShimmerReplicatorViewCell`
 
-### `ShimmerView`
+### ShimmerView
 `ShimmerView` is a subclass of `UIView` that has `CAGradientLayer` as a sublayer and encapsulates the logic for the shimmering effect animation.
 ```swift
 let shimmerView = ShimmerView()
@@ -39,12 +39,16 @@ let style = ShimmerViewStyle(
 shimmerView.apply(style: style)
 ```
 
-### `ShimmerSyncTarget`
+### ShimmerSyncTarget
 `ShimmerView` can be used as it is, but the shimmering effect would be effectively displayed when all the subviews’s effect in the screen is synced and animated together.
+
+| Not Synced | Synced |
+|---|---|
+|![NotSynced](images/shimmer_view_not_synced.gif)|![Synced](images/shimmer_view_synced.gif)|
 
 To make the best effect, create a view or view controller that contains multiple ShimmerViews and specify the container as `ShimmerSyncTarget`. ShimmerView will calculate its relative origin against the target and adjust the effect automatically.
 
-### `ShimmerReplicatorView` & `ShimmerReplicatorViewCell`
+### ShimmerReplicatorView & ShimmerReplicatorViewCell
 `ShimmerReplicatorView` will let you create a list type loading screen with a few lines of code.
 
 ```swift
