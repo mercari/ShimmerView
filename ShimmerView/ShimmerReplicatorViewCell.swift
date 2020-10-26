@@ -5,4 +5,5 @@ import UIKit
 /// Also, `ShimmerReplicatorView` starts all the cells' animation when its `startAnimating` is called.
 public protocol ShimmerReplicatorViewCell: UIView {
     func startAnimating()
+    func stopAnimating()
 }

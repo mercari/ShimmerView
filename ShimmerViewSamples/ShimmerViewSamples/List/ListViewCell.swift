@@ -21,4 +21,11 @@ class ListViewCell: UIView, ShimmerReplicatorViewCell {
         secondLineView.startAnimating()
         thirdLineView.startAnimating()
     }
+    
+    func stopAnimating() {
+        thumbnailView.stopAnimating()
+        firstLineView.stopAnimating()
+        secondLineView.stopAnimating()
+        thirdLineView.stopAnimating()
+    }
 }

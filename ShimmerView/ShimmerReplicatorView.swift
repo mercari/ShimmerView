@@ -174,4 +174,11 @@ public class ShimmerReplicatorView: UIView {
             $0.startAnimating()
         }
     }
+    
+    public func stopAnimating() {
+        isAnimating = false
+        stackView.arrangedSubviews.compactMap { $0 as? ShimmerReplicatorViewCell }.forEach {
+            $0.stopAnimating()
+        }
+    }
 }
