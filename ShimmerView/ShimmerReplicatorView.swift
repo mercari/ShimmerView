@@ -59,6 +59,7 @@ public class ShimmerReplicatorView: UIView {
     public private(set) var verticalEdgeMode: EdgeMode
     private let cellProvider: () -> ShimmerReplicatorViewCell
     
+    private var cellSizeConstraints = [UIView: [NSLayoutConstraint]]()
     
     /// Initializer
     /// - Parameters:
@@ -144,16 +145,37 @@ public class ShimmerReplicatorView: UIView {
         replicatorLayer.instanceCount = Int(verticalNumber)
         replicatorLayer.instanceTransform = CATransform3DMakeTranslation(0, itemSize.height + lineSpacing, 0)
 
-        // add/remove cells to the stack view
+        // Remove the previous cell constraints
+        cellSizeConstraints.forEach { cell, constraints in
+            constraints.forEach { constraint in
+                constraint.isActive = false
+                cell.removeConstraint(constraint)
+            }
+        }
+        cellSizeConstraints.removeAll()
+        
         let currentCount = stackView.arrangedSubviews.count
+        // reset the cell
+        for i in 0..<currentCount {
+            let cell = stackView.arrangedSubviews[i]
+            let widthConstraint = cell.widthAnchor.constraint(equalToConstant: itemSize.width)
+            let heightConstraint = cell.heightAnchor.constraint(equalToConstant: itemSize.height)
+            NSLayoutConstraint.activate([widthConstraint, heightConstraint])
+            cellSizeConstraints[cell] = [widthConstraint, heightConstraint]
+            if isAnimating, let cell = cell as? ShimmerReplicatorViewCell {
+                cell.startAnimating()
+            }
+        }
+        
+        // add/remove cells to the stack view
         if currentCount < Int(horizontalNumber) {
             for _ in 0..<(Int(horizontalNumber)-currentCount) {
                 let newCell = cellProvider()
                 newCell.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    newCell.widthAnchor.constraint(equalToConstant: itemSize.width),
-                    newCell.heightAnchor.constraint(equalToConstant: itemSize.height)
-                ])
+                let widthConstraint = newCell.widthAnchor.constraint(equalToConstant: itemSize.width)
+                let heightConstraint = newCell.heightAnchor.constraint(equalToConstant: itemSize.height)
+                NSLayoutConstraint.activate([widthConstraint, heightConstraint])
+                cellSizeConstraints[newCell] = [widthConstraint, heightConstraint]
                 stackView.addArrangedSubview(newCell)
                 if isAnimating {
                     newCell.startAnimating()
