@@ -24,8 +24,6 @@ class MainViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        clearsSelectionOnViewWillAppear = true
-
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.rowHeight = 56
