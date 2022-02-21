@@ -1,38 +1,44 @@
 import UIKit
 import simd
 
-extension ShimmerSyncTarget {
-    var effectDiameter: CGFloat {
-        return syncTargetView.frame.diagonalDistance
-    }
-
-    var effectRadius: CGFloat {
-        return effectDiameter / 2
-    }
-
-    var effectWidth: CGFloat {
-        switch style.effectSpan {
-        case .ratio(let ratio):
-            return effectDiameter*ratio
-        case .points(let points):
-            return points
-        }
-    }
-}
-
-internal extension ShimmerView {
+extension ShimmerCoreView {
     class Animator {
-        let shimmerView: ShimmerView
-        let syncTarget: ShimmerSyncTarget
+        let baseBounds: CGRect
+        let elementFrame: CGRect
+        let gradientFrame: CGRect
+        let style: ShimmerViewStyle
+        let effectBeginTime: CFTimeInterval
         
-        init(shimmerView: ShimmerView) {
-            self.shimmerView = shimmerView
-            self.syncTarget = shimmerView.nearestShimmerSyncTarget ?? shimmerView
+        init(
+            baseBounds: CGRect,
+            elementFrame: CGRect,
+            gradientFrame: CGRect,
+            style: ShimmerViewStyle,
+            effectBeginTime: CFTimeInterval
+        ) {
+            self.baseBounds = baseBounds
+            self.elementFrame = elementFrame
+            self.gradientFrame = gradientFrame
+            self.style = style
+            self.effectBeginTime = effectBeginTime
         }
         
+        var effectDiameter: CGFloat {
+            return baseBounds.diagonalDistance
+        }
+
+        var effectWidth: CGFloat {
+            switch style.effectSpan {
+            case .ratio(let ratio):
+                return effectDiameter*ratio
+            case .points(let points):
+                return points
+            }
+        }
+
         var interpolatedColors: [Any] {
-            let baseColor = syncTarget.style.baseColor
-            let highlightColor = syncTarget.style.highlightColor
+            let baseColor = style.baseColor
+            let highlightColor = style.highlightColor
             let numberOfSteps = 30
             let baseColors: [UIColor] = [baseColor, highlightColor, baseColor]
             var colors: [UIColor] = []
@@ -54,54 +60,56 @@ internal extension ShimmerView {
         /// PointD: The intersection point of LineA and LineC.
         /// Effect Radius: The distance between the center of the sync target view and PointD
         lazy var effectRadius: CGFloat = {
-            let baseAngle = atan(syncTarget.syncTargetView.frame.height / syncTarget.syncTargetView.frame.width)
-            var effectAngle = syncTarget.style.effectAngle.truncatingRemainder(dividingBy: .pi)
+            let baseAngle = atan(baseBounds.height / baseBounds.width)
+            var effectAngle = style.effectAngle.truncatingRemainder(dividingBy: .pi)
             while effectAngle < 0 {
                 effectAngle += .pi * 2
             }
             effectAngle = effectAngle.truncatingRemainder(dividingBy: .pi)
+            let radius = effectDiameter / 2
             
             switch true {
             case effectAngle<CGFloat.pi*0.5:
-                return abs(cos(baseAngle - effectAngle))*syncTarget.effectRadius
+                return abs(cos(baseAngle - effectAngle))*radius
             default:
-                return abs(cos(baseAngle - effectAngle+CGFloat.pi*0.5))*syncTarget.effectRadius
+                return abs(cos(baseAngle - effectAngle+CGFloat.pi*0.5))*radius
             }
         }()
         
         var vectorFromViewCenterToStartPointFrom: CGVector {
-            let distance = effectRadius + syncTarget.effectWidth
-            let fromVector = CGVector(dx: -distance*cos(syncTarget.style.effectAngle), dy: -distance*sin(syncTarget.style.effectAngle))
+            let distance = effectRadius + effectWidth
+            let fromVector = CGVector(dx: -distance*cos(style.effectAngle), dy: -distance*sin(style.effectAngle))
             return fromVector
         }
         
         var vectorFromViewCenterToStartPointTo: CGVector {
             let distance = effectRadius
-            let fromVector = CGVector(dx: distance*cos(syncTarget.style.effectAngle), dy: distance*sin(syncTarget.style.effectAngle))
+            let fromVector = CGVector(dx: distance*cos(style.effectAngle), dy: distance*sin(style.effectAngle))
             return fromVector
         }
         
         var vectorFromViewCenterToEndPointFrom: CGVector {
             let distance = effectRadius
-            let fromVector = CGVector(dx: -distance*cos(syncTarget.style.effectAngle), dy: -distance*sin(syncTarget.style.effectAngle))
+            let fromVector = CGVector(dx: -distance*cos(style.effectAngle), dy: -distance*sin(style.effectAngle))
             return fromVector
         }
         
         var vectorFromViewCenterToEndPointTo: CGVector {
-            let distance = effectRadius + syncTarget.effectWidth
-            let fromVector = CGVector(dx: distance*cos(syncTarget.style.effectAngle), dy: distance*sin(syncTarget.style.effectAngle))
+            let distance = effectRadius + effectWidth
+            let fromVector = CGVector(dx: distance*cos(style.effectAngle), dy: distance*sin(style.effectAngle))
             return fromVector
         }
         
         func calculateTargetPoint(with vectorFromViewCenter: CGVector) -> CGPoint {
-            let pointOnSyncTargetView = syncTarget.syncTargetView.bounds.mid.add(vector: vectorFromViewCenter)
-            
             // convert coordinate space from sync target view to gradient layer
-            let toConverted = syncTarget.syncTargetView.convert(pointOnSyncTargetView, to: shimmerView)
-            let converted = shimmerView.layer.convert(toConverted, to: shimmerView.gradientLayer)
+            let pointOnScope = baseBounds.mid.add(vector: vectorFromViewCenter)
+            let elementToScope = elementFrame.origin.vector(to: baseBounds.origin)
+            let pointOnElement = pointOnScope.add(vector: elementToScope)
+            let gradientToElement = gradientFrame.origin.vector(to: CGPoint.zero)
+            let converted = pointOnElement.add(vector: gradientToElement)
             
             // convert point on gradient layer to ratio
-            let denominator = shimmerView.gradientLayer.frame.width
+            let denominator = gradientFrame.width
             return CGPoint(x: converted.x / denominator, y: converted.y / denominator)
         }
         
@@ -110,11 +118,11 @@ internal extension ShimmerView {
         }
         
         var startPointAnimationToValue: CGPoint {
-            calculateTargetPoint(with: vectorFromViewCenterToStartPointTo)
+            return calculateTargetPoint(with: vectorFromViewCenterToStartPointTo)
         }
         
         var endPointAnimationFromValue: CGPoint {
-            calculateTargetPoint(with: vectorFromViewCenterToEndPointFrom)
+            return calculateTargetPoint(with: vectorFromViewCenterToEndPointFrom)
         }
         
         var endPointAnimationToValue: CGPoint {
@@ -126,6 +134,7 @@ internal extension ShimmerView {
             animation.fromValue = startPointAnimationFromValue
             animation.toValue = startPointAnimationToValue
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            
             return animation
         }
         
@@ -134,24 +143,26 @@ internal extension ShimmerView {
             animation.fromValue = endPointAnimationFromValue
             animation.toValue = endPointAnimationToValue
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            
             return animation
         }
      
         var gradientLayerAnimation: CAAnimationGroup {
             let groupAnimation = CAAnimationGroup()
             groupAnimation.animations = [startPointAnimation, endPointAnimation]
-            groupAnimation.duration = syncTarget.style.duration
+            groupAnimation.duration = style.duration
             groupAnimation.fillMode = .both
 
             let animation = CAAnimationGroup()
             animation.animations = [groupAnimation]
-            animation.duration = syncTarget.style.duration + syncTarget.style.interval
+            animation.duration = style.duration + style.interval
             animation.repeatCount = .infinity
             animation.fillMode = .both
             animation.isRemovedOnCompletion = false
-            animation.beginTime = syncTarget.effectBeginTime
-            animation.timeOffset = (CACurrentMediaTime()-syncTarget.effectBeginTime).truncatingRemainder(dividingBy: syncTarget.style.duration)
+            animation.beginTime = effectBeginTime
+            animation.timeOffset = (CACurrentMediaTime()-effectBeginTime).truncatingRemainder(dividingBy: style.duration)
             return animation
         }
     }
 }
+

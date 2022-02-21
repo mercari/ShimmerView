@@ -1,20 +1,23 @@
-import Foundation
 import UIKit
 
-open class ShimmerView: UIView, ShimmerSyncTarget, ShimmerReplicatorViewCell {
+class ShimmerCoreView: UIView {
     internal static let animationKey = "ShimmerEffect"
-
+    
     private(set) var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         return layer
     }()
 
-    public private(set) var style: ShimmerViewStyle = .default
-
     private(set) var isAnimating: Bool = false
-
-    public private(set) var effectBeginTime: CFTimeInterval = 0
-
+    
+    private var baseBounds: CGRect = .zero
+    private var elementFrame: CGRect = .zero
+    private var gradientFrame: CGRect {
+        layer.convert(bounds, to: gradientLayer)
+    }
+    private(set) var style: ShimmerViewStyle = .default
+    private var effectBeginTime: CFTimeInterval = 0
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -24,7 +27,7 @@ open class ShimmerView: UIView, ShimmerSyncTarget, ShimmerReplicatorViewCell {
         super.init(coder: coder)
         setup()
     }
-
+    
     private func setup() {
         layer.masksToBounds = true
         layer.addSublayer(gradientLayer)
@@ -32,28 +35,52 @@ open class ShimmerView: UIView, ShimmerSyncTarget, ShimmerReplicatorViewCell {
     }
 
     public func startAnimating() {
-        effectBeginTime = CACurrentMediaTime()
         isAnimating = true
         
         setupAnimation()
     }
 
     private func setupAnimation() {
-        gradientLayer.removeAnimation(forKey: ShimmerView.animationKey)
-        let animator = Animator(shimmerView: self)
+        gradientLayer.removeAnimation(forKey: ShimmerCoreView.animationKey)
+        let animator = ShimmerCoreView.Animator(
+            baseBounds: baseBounds,
+            elementFrame: elementFrame,
+            gradientFrame: gradientFrame,
+            style: style,
+            effectBeginTime: effectBeginTime
+        )
         gradientLayer.colors = animator.interpolatedColors
-        gradientLayer.add(animator.gradientLayerAnimation, forKey: ShimmerView.animationKey)
+        gradientLayer.add(animator.gradientLayerAnimation, forKey: ShimmerCoreView.animationKey)
     }
     
     public func stopAnimating() {
         isAnimating = false
-        gradientLayer.removeAnimation(forKey: ShimmerView.animationKey)
+        gradientLayer.removeAnimation(forKey: ShimmerCoreView.animationKey)
         gradientLayer.colors = nil
     }
 
-    public func apply(style: ShimmerViewStyle) {
-        self.style = style
-
+    public func update(
+        baseBounds: CGRect? = nil,
+        elementFrame: CGRect? = nil,
+        style: ShimmerViewStyle? = nil,
+        effectBeginTime: CFTimeInterval? = nil
+    ) {
+        if let baseBounds = baseBounds {
+            self.baseBounds = baseBounds
+        }
+        
+        if let elementFrame = elementFrame {
+            self.elementFrame = elementFrame
+        }
+        
+        if let style = style {
+            self.style = style
+        }
+        
+        if let effectBeginTime = effectBeginTime {
+            self.effectBeginTime = effectBeginTime
+        }
+        
         if isAnimating {
             setupAnimation()
         }
@@ -81,3 +108,4 @@ open class ShimmerView: UIView, ShimmerSyncTarget, ShimmerReplicatorViewCell {
         }
     }
 }
+
