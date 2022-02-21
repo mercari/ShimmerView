@@ -1,42 +1,42 @@
 import UIKit
 
-class ShimmerCoreView: UIView {
-    internal static let animationKey = "ShimmerEffect"
-    
+internal class ShimmerCoreView: UIView {
+    static let animationKey = "ShimmerEffect"
+
     private(set) var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         return layer
     }()
 
     private(set) var isAnimating: Bool = false
-    
-    private var baseBounds: CGRect = .zero
-    private var elementFrame: CGRect = .zero
-    private var gradientFrame: CGRect {
+
+    private(set) var baseBounds: CGRect = .zero
+    private(set) var elementFrame: CGRect = .zero
+    var gradientFrame: CGRect {
         layer.convert(bounds, to: gradientLayer)
     }
     private(set) var style: ShimmerViewStyle = .default
-    private var effectBeginTime: CFTimeInterval = 0
-    
-    public override init(frame: CGRect) {
+    private(set) var effectBeginTime: CFTimeInterval = 0
+
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
-    required public init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
-    
+
     private func setup() {
         layer.masksToBounds = true
         layer.addSublayer(gradientLayer)
         scaleGradientLayerToAspectFill()
     }
 
-    public func startAnimating() {
+    func startAnimating() {
         isAnimating = true
-        
+
         setupAnimation()
     }
 
@@ -52,14 +52,14 @@ class ShimmerCoreView: UIView {
         gradientLayer.colors = animator.interpolatedColors
         gradientLayer.add(animator.gradientLayerAnimation, forKey: ShimmerCoreView.animationKey)
     }
-    
-    public func stopAnimating() {
+
+    func stopAnimating() {
         isAnimating = false
         gradientLayer.removeAnimation(forKey: ShimmerCoreView.animationKey)
         gradientLayer.colors = nil
     }
 
-    public func update(
+    func update(
         baseBounds: CGRect? = nil,
         elementFrame: CGRect? = nil,
         style: ShimmerViewStyle? = nil,
@@ -85,8 +85,8 @@ class ShimmerCoreView: UIView {
             setupAnimation()
         }
     }
-    
-    override public func layoutSubviews() {
+
+    override func layoutSubviews() {
         super.layoutSubviews()
 
         scaleGradientLayerToAspectFill()
@@ -108,4 +108,3 @@ class ShimmerCoreView: UIView {
         }
     }
 }
-

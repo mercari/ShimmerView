@@ -2,28 +2,28 @@ import Foundation
 import UIKit
 
 open class ShimmerView: UIView, ShimmerSyncTarget {
-    private var coreView: ShimmerCoreView = {
+    internal var coreView: ShimmerCoreView = {
         let view = ShimmerCoreView()
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return view
     }()
 
     public var style: ShimmerViewStyle = .default
-    
+
     public var effectBeginTime: CFTimeInterval = 0
 
-    private var syncTarget: ShimmerSyncTarget {
+    internal var syncTarget: ShimmerSyncTarget {
         nearestShimmerSyncTarget ?? self
     }
-    
-    private var baseBounds: CGRect {
+
+    internal var baseBounds: CGRect {
         syncTarget.syncTargetView.bounds
     }
-    
-    private var elementFrame: CGRect {
+
+    internal var elementFrame: CGRect {
         convert(bounds, to: syncTarget.syncTargetView)
     }
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -51,7 +51,7 @@ open class ShimmerView: UIView, ShimmerSyncTarget {
 
         coreView.startAnimating()
     }
-    
+
     public func stopAnimating() {
         coreView.stopAnimating()
     }
@@ -59,7 +59,7 @@ open class ShimmerView: UIView, ShimmerSyncTarget {
     public func apply(style: ShimmerViewStyle) {
         coreView.update(style: style)
     }
-    
+
     override public func layoutSubviews() {
         super.layoutSubviews()
         

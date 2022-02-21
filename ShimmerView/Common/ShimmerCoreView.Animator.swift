@@ -1,13 +1,13 @@
 import UIKit
 import simd
 
-extension ShimmerCoreView {
-    class Animator {
-        let baseBounds: CGRect
-        let elementFrame: CGRect
-        let gradientFrame: CGRect
-        let style: ShimmerViewStyle
-        let effectBeginTime: CFTimeInterval
+internal extension ShimmerCoreView {
+    struct Animator {
+        var baseBounds: CGRect
+        var elementFrame: CGRect
+        var gradientFrame: CGRect
+        var style: ShimmerViewStyle
+        var effectBeginTime: CFTimeInterval
         
         init(
             baseBounds: CGRect,
@@ -59,7 +59,7 @@ extension ShimmerCoreView {
         /// LineC: A line passing through VertexB and intersects vertically with LineA.
         /// PointD: The intersection point of LineA and LineC.
         /// Effect Radius: The distance between the center of the sync target view and PointD
-        lazy var effectRadius: CGFloat = {
+        var effectRadius: CGFloat {
             let baseAngle = atan(baseBounds.height / baseBounds.width)
             var effectAngle = style.effectAngle.truncatingRemainder(dividingBy: .pi)
             while effectAngle < 0 {
@@ -74,7 +74,7 @@ extension ShimmerCoreView {
             default:
                 return abs(cos(baseAngle - effectAngle+CGFloat.pi*0.5))*radius
             }
-        }()
+        }
         
         var vectorFromViewCenterToStartPointFrom: CGVector {
             let distance = effectRadius + effectWidth
