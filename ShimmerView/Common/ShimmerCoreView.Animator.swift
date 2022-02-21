@@ -43,7 +43,7 @@ internal extension ShimmerCoreView {
             let baseColors: [UIColor] = [baseColor, highlightColor, baseColor]
             var colors: [UIColor] = []
             for i in 0..<baseColors.count-1 {
-                let lengthOfStep = 1.0/Float(numberOfSteps)
+                let lengthOfStep = 1.0 / Float(numberOfSteps)
                 let newColors = stride(from: 0.0, to: 1.0, by: lengthOfStep).map {
                     baseColors[i].interpolate(with: baseColors[i+1], degree: CGFloat(simd_smoothstep(0.0, 1.0, $0)))
                 }
@@ -69,34 +69,34 @@ internal extension ShimmerCoreView {
             let radius = effectDiameter / 2
             
             switch true {
-            case effectAngle<CGFloat.pi*0.5:
+            case effectAngle < CGFloat.pi * 0.5:
                 return abs(cos(baseAngle - effectAngle))*radius
             default:
-                return abs(cos(baseAngle - effectAngle+CGFloat.pi*0.5))*radius
+                return abs(cos(baseAngle - effectAngle + CGFloat.pi * 0.5)) * radius
             }
         }
         
         var vectorFromViewCenterToStartPointFrom: CGVector {
             let distance = effectRadius + effectWidth
-            let fromVector = CGVector(dx: -distance*cos(style.effectAngle), dy: -distance*sin(style.effectAngle))
+            let fromVector = CGVector(dx: -distance * cos(style.effectAngle), dy: -distance * sin(style.effectAngle))
             return fromVector
         }
         
         var vectorFromViewCenterToStartPointTo: CGVector {
             let distance = effectRadius
-            let fromVector = CGVector(dx: distance*cos(style.effectAngle), dy: distance*sin(style.effectAngle))
+            let fromVector = CGVector(dx: distance * cos(style.effectAngle), dy: distance * sin(style.effectAngle))
             return fromVector
         }
         
         var vectorFromViewCenterToEndPointFrom: CGVector {
             let distance = effectRadius
-            let fromVector = CGVector(dx: -distance*cos(style.effectAngle), dy: -distance*sin(style.effectAngle))
+            let fromVector = CGVector(dx: -distance * cos(style.effectAngle), dy: -distance*sin(style.effectAngle))
             return fromVector
         }
         
         var vectorFromViewCenterToEndPointTo: CGVector {
             let distance = effectRadius + effectWidth
-            let fromVector = CGVector(dx: distance*cos(style.effectAngle), dy: distance*sin(style.effectAngle))
+            let fromVector = CGVector(dx: distance * cos(style.effectAngle), dy: distance * sin(style.effectAngle))
             return fromVector
         }
         
@@ -109,8 +109,11 @@ internal extension ShimmerCoreView {
             let converted = pointOnElement.add(vector: gradientToElement)
             
             // convert point on gradient layer to ratio
-            let denominator = gradientFrame.width
-            return CGPoint(x: converted.x / denominator, y: converted.y / denominator)
+            if gradientFrame.width == 0 {
+                return .zero
+            } else {
+                return CGPoint(x: converted.x / gradientFrame.width, y: converted.y / gradientFrame.width)
+            }
         }
         
         var startPointAnimationFromValue: CGPoint {
@@ -160,7 +163,7 @@ internal extension ShimmerCoreView {
             animation.fillMode = .both
             animation.isRemovedOnCompletion = false
             animation.beginTime = effectBeginTime
-            animation.timeOffset = (CACurrentMediaTime()-effectBeginTime).truncatingRemainder(dividingBy: style.duration)
+            animation.timeOffset = (CACurrentMediaTime() - effectBeginTime).truncatingRemainder(dividingBy: style.duration)
             return animation
         }
     }

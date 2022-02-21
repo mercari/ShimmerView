@@ -69,16 +69,16 @@ class ShimmerCoreViewTests: XCTestCase {
     
     func testLayoutSubviews() {
         let view = ShimmerCoreView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        
+
         XCTAssertEqual(view.gradientLayer.frame.width, view.gradientLayer.frame.height)
-        
+
         XCTContext.runActivity(named: "Height is bigger") { _ in
             view.frame.size = CGSize(width: 100, height: 300)
             view.layoutSubviews()
             XCTAssertEqual(view.gradientLayer.frame.origin, CGPoint(x: -100, y: 0))
             XCTAssertEqual(view.gradientLayer.frame.width, view.gradientLayer.frame.height)
         }
-        
+
         XCTContext.runActivity(named: "Width is bigger") { _ in
             view.frame.size = CGSize(width: 300, height: 100)
             view.layoutSubviews()
