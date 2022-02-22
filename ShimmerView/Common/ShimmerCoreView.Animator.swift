@@ -103,10 +103,10 @@ internal extension ShimmerCoreView {
         func calculateTargetPoint(with vectorFromViewCenter: CGVector) -> CGPoint {
             // convert coordinate space from sync target view to gradient layer
             let pointOnScope = baseBounds.mid.add(vector: vectorFromViewCenter)
-            let elementToScope = elementFrame.origin.vector(to: baseBounds.origin)
-            let pointOnElement = pointOnScope.add(vector: elementToScope)
-            let gradientToElement = gradientFrame.origin.vector(to: CGPoint.zero)
-            let converted = pointOnElement.add(vector: gradientToElement)
+            let scopeToElement = baseBounds.origin.vector(to: elementFrame.origin)
+            let pointOnElement = pointOnScope.subtract(vector: scopeToElement)
+            let elementToGradient = CGPoint.zero.vector(to: gradientFrame.origin)
+            let converted = pointOnElement.subtract(vector: elementToGradient)
             
             // convert point on gradient layer to ratio
             if gradientFrame.width == 0 {

@@ -13,7 +13,7 @@ internal class ShimmerCoreView: UIView {
     private(set) var baseBounds: CGRect = .zero
     private(set) var elementFrame: CGRect = .zero
     var gradientFrame: CGRect {
-        layer.convert(bounds, to: gradientLayer)
+        gradientLayer.frame
     }
     private(set) var style: ShimmerViewStyle = .default
     private(set) var effectBeginTime: CFTimeInterval = 0

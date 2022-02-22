@@ -86,4 +86,16 @@ class ShimmerCoreViewTests: XCTestCase {
             XCTAssertEqual(view.gradientLayer.frame.width, view.gradientLayer.frame.height)
         }
     }
+
+    func testGradientFrame() {
+        let baseBounds = CGRect(x: 0, y: 0, width: 300, height: 300)
+        let view = ShimmerCoreView(frame: baseBounds)
+        view.layoutSubviews()
+
+        XCTAssertEqual(view.gradientFrame, baseBounds)
+
+        view.frame.size = CGSize(width: 100, height: 300)
+        view.layoutSubviews()
+        XCTAssertEqual(view.gradientFrame, CGRect(x: -100, y: 0, width: 300, height: 300))
+    }
 }
