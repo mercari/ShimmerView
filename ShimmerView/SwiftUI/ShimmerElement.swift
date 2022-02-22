@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct ShimmerElement: View {
+public struct ShimmerElement: View {
     @Environment(\.shimmerGeometry)
     private var geometry
     
@@ -12,11 +12,16 @@ struct ShimmerElement: View {
     @State
     private var elementFrame: CGRect = .zero
     
-    var width: CGFloat?
+    public var width: CGFloat?
     
-    var height: CGFloat?
+    public var height: CGFloat?
     
-    var body: some View {
+    public init(width: CGFloat? = nil, height: CGFloat? = nil) {
+        self.width = width
+        self.height = height
+    }
+
+    public var body: some View {
         ShimmerViewWrapper(
             baseBounds: $baseBounds,
             elementFrame: $elementFrame
