@@ -22,14 +22,40 @@ class ShimmerCoreViewAnimatorTests: XCTestCase {
             effectBeginTime: 0
         )
 
+        XCTContext.runActivity(named: "Effect Angle = 0.0 pi") { _ in
+            animator.style.effectAngle = 0.0 * CGFloat.pi
+            XCTAssertEqual(
+                animator.effectRadius,
+                baseBounds.width / 2,
+                accuracy: 0.001
+            )
+        }
+
         XCTContext.runActivity(named: "Effect Angle = 0.25 pi") { _ in
             animator.style.effectAngle = 0.25 * CGFloat.pi
-            XCTAssertEqual(animator.effectRadius, baseBounds.diagonalDistance/2)
+            XCTAssertEqual(
+                animator.effectRadius,
+                baseBounds.diagonalDistance/2,
+                accuracy: 0.001
+            )
+        }
+
+        XCTContext.runActivity(named: "Effect Angle = 0.5 pi") { _ in
+            animator.style.effectAngle = 0.5 * CGFloat.pi
+            XCTAssertEqual(
+                animator.effectRadius,
+                baseBounds.height / 2,
+                accuracy: 0.001
+            )
         }
 
         XCTContext.runActivity(named: "Effect Angle = 0.75 pi") { _ in
             animator.style.effectAngle = 0.75 * CGFloat.pi
-            XCTAssertEqual(animator.effectRadius, baseBounds.diagonalDistance/2)
+            XCTAssertEqual(
+                animator.effectRadius,
+                baseBounds.diagonalDistance/2,
+                accuracy: 0.001
+            )
         }
     }
     
