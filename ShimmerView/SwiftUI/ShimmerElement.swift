@@ -5,17 +5,17 @@ import SwiftUI
 public struct ShimmerElement: View {
     @Environment(\.shimmerGeometry)
     private var geometry
-    
+
     @State
     private var baseBounds: CGRect = .zero
 
     @State
     private var elementFrame: CGRect = .zero
-    
+
     public var width: CGFloat?
-    
+
     public var height: CGFloat?
-    
+
     public init(width: CGFloat? = nil, height: CGFloat? = nil) {
         self.width = width
         self.height = height
@@ -51,16 +51,16 @@ private struct FramePreferenceKey: PreferenceKey {
 
 @available(iOS 14.0, *)
 struct ShimmerViewWrapper: UIViewRepresentable {
-    
+
     @Binding
     var baseBounds: CGRect
-    
+
     @Binding
     var elementFrame: CGRect
-    
+
     @EnvironmentObject
     var state: ShimmerState
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
@@ -68,7 +68,7 @@ struct ShimmerViewWrapper: UIViewRepresentable {
     func makeUIView(context: Context) -> ShimmerCoreView {
         ShimmerCoreView(frame: .zero)
     }
-    
+
     func updateUIView(_ uiView: ShimmerCoreView, context: Context) {
         uiView.update(
             baseBounds: baseBounds,
@@ -76,7 +76,7 @@ struct ShimmerViewWrapper: UIViewRepresentable {
             style: state.style,
             effectBeginTime: state.effectBeginTime
         )
-        
+
         if uiView.isAnimating != state.isAnimating {
             if state.isAnimating {
                 uiView.startAnimating()
@@ -85,10 +85,8 @@ struct ShimmerViewWrapper: UIViewRepresentable {
             }
         }
     }
-    
+
     class Coordinator {
         init() {}
     }
 }
-
-
