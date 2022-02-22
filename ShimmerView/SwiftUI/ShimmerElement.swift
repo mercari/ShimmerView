@@ -28,23 +28,23 @@ public struct ShimmerElement: View {
         )
         .frame(width: width, height: height)
         .anchorPreference(
-            key: BoundsPreferenceKey.self,
+            key: FramePreferenceKey.self,
             value: .bounds,
-            transform: { $0 }
+            transform: { geometry?[$0] }
         )
-        .onPreferenceChange(BoundsPreferenceKey.self) { anchor in
-            guard let anchor = anchor, let geometry = geometry else {
+        .onPreferenceChange(FramePreferenceKey.self) { frame in
+            guard let frame = frame, let geometry = geometry else {
                 return
             }
             baseBounds = CGRect(origin: .zero, size: geometry.size)
-            elementFrame = geometry[anchor]
+            elementFrame = frame
         }
     }
 }
 
 @available(iOS 14.0, *)
-private struct BoundsPreferenceKey: PreferenceKey {
-    typealias Value = Anchor<CGRect>?
+private struct FramePreferenceKey: PreferenceKey {
+    typealias Value = CGRect?
     static var defaultValue: Value = nil
     static func reduce(value: inout Value, nextValue: () -> Value) {}
 }
