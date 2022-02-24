@@ -1,6 +1,6 @@
 #  ShimmerView ![Platform iOS11+](https://img.shields.io/badge/platform-ios11%2B-red) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-ShimmerView is a subclass of `UIView` to construct Skelton View + Shimmering Effect type loading indicator. This framework is inspired by Facebook's [Shimmer](https://github.com/facebook/Shimmer).
+ShimmerView is a collection of APIs to construct Skelton View + Shimmering Effect type loading indicator on UIKit and SwiftUI. This framework is inspired by Facebook's [Shimmer](https://github.com/facebook/Shimmer).
 
 ![ShimmerViewExample0](images/shimmer_view_example_0.gif)
 
@@ -12,8 +12,50 @@ ShimmerView is a subclass of `UIView` to construct Skelton View + Shimmering Eff
 github "mercari/ShimmerView"
 ```
 
-## Usage
-Shimmer Effect has four related APIs as blow:
+## Usage on SwiftUI
+`ShimmerView` has two related APIs on SwiftUI as below:
+- `ShimmerScope`
+- `ShimmerElement`
+You can write a custome loading indicator like below by combining these two APIs and other `SwiftUI` APIs.
+```swift
+struct Placeholder: View {
+
+    @State
+    private var isAnimating: Bool = true
+
+    var body: some View {
+        ShimmerScope(isAnimating: $isAnimating) {
+            HStack(alignment: .top) {
+                ShimmerElement(width: 100, height: 100)
+                    .cornerRadius(4)
+                VStack(alignment: .leading, spacing: 8) {
+                    ShimmerElement(height: 12)
+                        .cornerRadius(4)
+                    ShimmerElement(height: 12)
+                        .cornerRadius(4)
+                    ShimmerElement(width: 100, height: 12)
+                        .cornerRadius(4)
+                }
+            }
+            .padding(.horizontal, 16)
+        }
+    }
+}
+```
+
+
+### ShimmerScope
+`ShimmerScope` is a container view to sync the animation timing and style of all the `ShimmerElement`s in its content.
+
+Please note that `ShimmerScope` uses `GeometryReader` in its body function and it doesn't fit to the content but expands to the parent view bounds.
+
+### ShimmerElement
+`ShimmerElement` is a view to show the shimmering effect animation.
+
+`ShimmerElement` looks for `EnvironmentObject` injected by `ShimmerScope` so please make sure to use it as a sub view of `ShimmerScope`'s `content` function.
+
+## Usage on UIKit
+`ShimmerView` has four related APIs on UIKit as blow:
 - `ShimmerView`
 - `ShimmerSyncTarget`
 - `ShimmerReplicatorView`
