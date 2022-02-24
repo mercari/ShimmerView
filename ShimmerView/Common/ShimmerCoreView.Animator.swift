@@ -115,41 +115,41 @@ internal extension ShimmerCoreView {
                 return CGPoint(x: converted.x / gradientFrame.width, y: converted.y / gradientFrame.width)
             }
         }
-        
+
         var startPointAnimationFromValue: CGPoint {
             calculateTargetPoint(with: vectorFromViewCenterToStartPointFrom)
         }
-        
+
         var startPointAnimationToValue: CGPoint {
             return calculateTargetPoint(with: vectorFromViewCenterToStartPointTo)
         }
-        
+
         var endPointAnimationFromValue: CGPoint {
             return calculateTargetPoint(with: vectorFromViewCenterToEndPointFrom)
         }
-        
+
         var endPointAnimationToValue: CGPoint {
             calculateTargetPoint(with: vectorFromViewCenterToEndPointTo)
         }
-        
+
         var startPointAnimation: CABasicAnimation {
             let animation = CABasicAnimation(keyPath: "startPoint")
             animation.fromValue = startPointAnimationFromValue
             animation.toValue = startPointAnimationToValue
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            
+
             return animation
         }
-        
+
         var endPointAnimation: CABasicAnimation {
             let animation = CABasicAnimation(keyPath: "endPoint")
             animation.fromValue = endPointAnimationFromValue
             animation.toValue = endPointAnimationToValue
             animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            
+
             return animation
         }
-     
+
         var gradientLayerAnimation: CAAnimationGroup {
             let groupAnimation = CAAnimationGroup()
             groupAnimation.animations = [startPointAnimation, endPointAnimation]
@@ -163,9 +163,7 @@ internal extension ShimmerCoreView {
             animation.fillMode = .both
             animation.isRemovedOnCompletion = false
             animation.beginTime = effectBeginTime
-            animation.timeOffset = (CACurrentMediaTime() - effectBeginTime).truncatingRemainder(dividingBy: style.duration)
             return animation
         }
     }
 }
-

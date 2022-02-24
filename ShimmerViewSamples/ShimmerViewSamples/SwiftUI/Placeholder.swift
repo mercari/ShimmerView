@@ -17,7 +17,7 @@ public struct Placeholder: View {
                 Spacer(minLength: 24)
                 ShimmerElement(width: 100, height: 12)
                 Spacer(minLength: 16)
-                ForEach(0..<16) { _ in
+                ForEach(0..<8) { _ in
                     HStack(alignment: .center, spacing: 4) {
                         ShimmerElement()
                             .aspectRatio(1, contentMode: .fit)

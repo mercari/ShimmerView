@@ -11,7 +11,7 @@ public struct ShimmerScope<Content: View>: View {
         isAnimating: Binding<Bool>,
         content: @escaping () -> Content
     ) {
-        _model = StateObject(wrappedValue: ShimmerState(style: style))
+        _model = StateObject(wrappedValue: ShimmerState(style: style, isAnimating: isAnimating.wrappedValue))
         _isAnimating = isAnimating
         self.content = content
     }
@@ -31,11 +31,15 @@ public struct ShimmerScope<Content: View>: View {
 @available(iOS 14.0, *)
 internal class ShimmerState: ObservableObject {
     let style: ShimmerViewStyle
-    @Published var isAnimating: Bool = true
+    @Published var isAnimating: Bool = false
     @Published var effectBeginTime: CFTimeInterval = 0
     
-    init(style: ShimmerViewStyle) {
+    init(style: ShimmerViewStyle, isAnimating: Bool) {
         self.style = style
+        if isAnimating {
+            self.isAnimating = isAnimating
+            effectBeginTime = CACurrentMediaTime()
+        }
     }
     
     func setAnimating(_ isAnimating: Bool) {
