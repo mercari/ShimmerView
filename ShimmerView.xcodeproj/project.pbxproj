@@ -10,12 +10,17 @@
 		3D17751F24A0604C00A4C7B5 /* UIResponder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17751E24A0604C00A4C7B5 /* UIResponder+Extensions.swift */; };
 		3D17752124A0608100A4C7B5 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17752024A0608100A4C7B5 /* CGRect+Extensions.swift */; };
 		3D17752324A063DA00A4C7B5 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17752224A063DA00A4C7B5 /* CGPoint+Extensions.swift */; };
-		3D17752524A06AE600A4C7B5 /* ShimmerView.Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17752424A06AE600A4C7B5 /* ShimmerView.Animator.swift */; };
+		3D17752524A06AE600A4C7B5 /* ShimmerCoreView.Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17752424A06AE600A4C7B5 /* ShimmerCoreView.Animator.swift */; };
 		3D17755524A0B22D00A4C7B5 /* ShimmerViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D17755424A0B22D00A4C7B5 /* ShimmerViewStyle.swift */; };
-		3D49EE9B24A5B242007F0C60 /* ShimmerViewAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49EE9A24A5B242007F0C60 /* ShimmerViewAnimatorTests.swift */; };
+		3D49EE9B24A5B242007F0C60 /* ShimmerCoreViewAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49EE9A24A5B242007F0C60 /* ShimmerCoreViewAnimatorTests.swift */; };
 		3D49EEA624A977E6007F0C60 /* ShimmerReplicatorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49EEA524A977E6007F0C60 /* ShimmerReplicatorViewCell.swift */; };
+		3DDFB83B27BE4B1D002EF594 /* ShimmerScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDFB83A27BE4B1D002EF594 /* ShimmerScope.swift */; };
+		3DDFB83D27BE4B29002EF594 /* ShimmerElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDFB83C27BE4B29002EF594 /* ShimmerElement.swift */; };
+		3DDFB83F27C31FBE002EF594 /* ShimmerCoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDFB83E27C31FBD002EF594 /* ShimmerCoreView.swift */; };
+		3DDFB84127C365D7002EF594 /* ShimmerSyncTargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDFB84027C365D7002EF594 /* ShimmerSyncTargetTests.swift */; };
+		3DDFB84327C36680002EF594 /* ShimmerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDFB84227C36680002EF594 /* ShimmerViewTests.swift */; };
 		3DF13EF7249792D8005675B8 /* ShimmerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DF13EED249792D8005675B8 /* ShimmerView.framework */; };
-		3DF13EFC249792D9005675B8 /* ShimmerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF13EFB249792D9005675B8 /* ShimmerViewTests.swift */; };
+		3DF13EFC249792D9005675B8 /* ShimmerCoreViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF13EFB249792D9005675B8 /* ShimmerCoreViewTests.swift */; };
 		3DF13EFE249792D9005675B8 /* ShimmerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DF13EF0249792D8005675B8 /* ShimmerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3DF13F0824979330005675B8 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF13F0724979330005675B8 /* ShimmerView.swift */; };
 		3DF13F0A24979381005675B8 /* ShimmerSyncTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF13F0924979381005675B8 /* ShimmerSyncTarget.swift */; };
@@ -37,15 +42,20 @@
 		3D17751E24A0604C00A4C7B5 /* UIResponder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extensions.swift"; sourceTree = "<group>"; };
 		3D17752024A0608100A4C7B5 /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		3D17752224A063DA00A4C7B5 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
-		3D17752424A06AE600A4C7B5 /* ShimmerView.Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.Animator.swift; sourceTree = "<group>"; };
+		3D17752424A06AE600A4C7B5 /* ShimmerCoreView.Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerCoreView.Animator.swift; sourceTree = "<group>"; };
 		3D17755424A0B22D00A4C7B5 /* ShimmerViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerViewStyle.swift; sourceTree = "<group>"; };
-		3D49EE9A24A5B242007F0C60 /* ShimmerViewAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerViewAnimatorTests.swift; sourceTree = "<group>"; };
+		3D49EE9A24A5B242007F0C60 /* ShimmerCoreViewAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerCoreViewAnimatorTests.swift; sourceTree = "<group>"; };
 		3D49EEA524A977E6007F0C60 /* ShimmerReplicatorViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerReplicatorViewCell.swift; sourceTree = "<group>"; };
+		3DDFB83A27BE4B1D002EF594 /* ShimmerScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerScope.swift; sourceTree = "<group>"; };
+		3DDFB83C27BE4B29002EF594 /* ShimmerElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerElement.swift; sourceTree = "<group>"; };
+		3DDFB83E27C31FBD002EF594 /* ShimmerCoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerCoreView.swift; sourceTree = "<group>"; };
+		3DDFB84027C365D7002EF594 /* ShimmerSyncTargetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerSyncTargetTests.swift; sourceTree = "<group>"; };
+		3DDFB84227C36680002EF594 /* ShimmerViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerViewTests.swift; sourceTree = "<group>"; };
 		3DF13EED249792D8005675B8 /* ShimmerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ShimmerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF13EF0249792D8005675B8 /* ShimmerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShimmerView.h; sourceTree = "<group>"; };
 		3DF13EF1249792D8005675B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DF13EF6249792D8005675B8 /* ShimmerViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShimmerViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DF13EFB249792D9005675B8 /* ShimmerViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerViewTests.swift; sourceTree = "<group>"; };
+		3DF13EFB249792D9005675B8 /* ShimmerCoreViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerCoreViewTests.swift; sourceTree = "<group>"; };
 		3DF13EFD249792D9005675B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DF13F0724979330005675B8 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		3DF13F0924979381005675B8 /* ShimmerSyncTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerSyncTarget.swift; sourceTree = "<group>"; };
@@ -83,6 +93,36 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		3DDFB83627BE4A5B002EF594 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3D17755424A0B22D00A4C7B5 /* ShimmerViewStyle.swift */,
+				3DDFB83E27C31FBD002EF594 /* ShimmerCoreView.swift */,
+				3D17752424A06AE600A4C7B5 /* ShimmerCoreView.Animator.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3DDFB83827BE4A7A002EF594 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				3DF13F0724979330005675B8 /* ShimmerView.swift */,
+				3DF13F0924979381005675B8 /* ShimmerSyncTarget.swift */,
+				3DF13F0B249793BC005675B8 /* ShimmerReplicatorView.swift */,
+				3D49EEA524A977E6007F0C60 /* ShimmerReplicatorViewCell.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		3DDFB83927BE4A86002EF594 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				3DDFB83A27BE4B1D002EF594 /* ShimmerScope.swift */,
+				3DDFB83C27BE4B29002EF594 /* ShimmerElement.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		3DF13EE3249792D8005675B8 = {
 			isa = PBXGroup;
 			children = (
@@ -104,15 +144,12 @@
 		3DF13EEF249792D8005675B8 /* ShimmerView */ = {
 			isa = PBXGroup;
 			children = (
+				3DDFB83927BE4A86002EF594 /* SwiftUI */,
+				3DDFB83827BE4A7A002EF594 /* UIKit */,
+				3DDFB83627BE4A5B002EF594 /* Common */,
 				3D17751D24A0603300A4C7B5 /* Extensions */,
 				3DF13EF0249792D8005675B8 /* ShimmerView.h */,
 				3DF13EF1249792D8005675B8 /* Info.plist */,
-				3DF13F0724979330005675B8 /* ShimmerView.swift */,
-				3D17755424A0B22D00A4C7B5 /* ShimmerViewStyle.swift */,
-				3DF13F0924979381005675B8 /* ShimmerSyncTarget.swift */,
-				3DF13F0B249793BC005675B8 /* ShimmerReplicatorView.swift */,
-				3D17752424A06AE600A4C7B5 /* ShimmerView.Animator.swift */,
-				3D49EEA524A977E6007F0C60 /* ShimmerReplicatorViewCell.swift */,
 			);
 			path = ShimmerView;
 			sourceTree = "<group>";
@@ -120,8 +157,10 @@
 		3DF13EFA249792D9005675B8 /* ShimmerViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				3DF13EFB249792D9005675B8 /* ShimmerViewTests.swift */,
-				3D49EE9A24A5B242007F0C60 /* ShimmerViewAnimatorTests.swift */,
+				3DDFB84027C365D7002EF594 /* ShimmerSyncTargetTests.swift */,
+				3DF13EFB249792D9005675B8 /* ShimmerCoreViewTests.swift */,
+				3D49EE9A24A5B242007F0C60 /* ShimmerCoreViewAnimatorTests.swift */,
+				3DDFB84227C36680002EF594 /* ShimmerViewTests.swift */,
 				3DF13EFD249792D9005675B8 /* Info.plist */,
 			);
 			path = ShimmerViewTests;
@@ -239,13 +278,16 @@
 			files = (
 				3DF13F0C249793BC005675B8 /* ShimmerReplicatorView.swift in Sources */,
 				3DF13F0824979330005675B8 /* ShimmerView.swift in Sources */,
+				3DDFB83D27BE4B29002EF594 /* ShimmerElement.swift in Sources */,
 				3D17752324A063DA00A4C7B5 /* CGPoint+Extensions.swift in Sources */,
 				3DF13F0A24979381005675B8 /* ShimmerSyncTarget.swift in Sources */,
 				3D17752124A0608100A4C7B5 /* CGRect+Extensions.swift in Sources */,
-				3D17752524A06AE600A4C7B5 /* ShimmerView.Animator.swift in Sources */,
+				3DDFB83B27BE4B1D002EF594 /* ShimmerScope.swift in Sources */,
+				3D17752524A06AE600A4C7B5 /* ShimmerCoreView.Animator.swift in Sources */,
 				3D17751F24A0604C00A4C7B5 /* UIResponder+Extensions.swift in Sources */,
 				3D49EEA624A977E6007F0C60 /* ShimmerReplicatorViewCell.swift in Sources */,
 				3DF13F0E24979436005675B8 /* UIColor+Extensions.swift in Sources */,
+				3DDFB83F27C31FBE002EF594 /* ShimmerCoreView.swift in Sources */,
 				3D17755524A0B22D00A4C7B5 /* ShimmerViewStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,8 +296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DF13EFC249792D9005675B8 /* ShimmerViewTests.swift in Sources */,
-				3D49EE9B24A5B242007F0C60 /* ShimmerViewAnimatorTests.swift in Sources */,
+				3DDFB84327C36680002EF594 /* ShimmerViewTests.swift in Sources */,
+				3DDFB84127C365D7002EF594 /* ShimmerSyncTargetTests.swift in Sources */,
+				3DF13EFC249792D9005675B8 /* ShimmerCoreViewTests.swift in Sources */,
+				3D49EE9B24A5B242007F0C60 /* ShimmerCoreViewAnimatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
