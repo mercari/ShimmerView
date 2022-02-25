@@ -12,12 +12,34 @@ ShimmerView is a collection of APIs to construct Skelton View + Shimmering Effec
 github "mercari/ShimmerView"
 ```
 
-## Usage on SwiftUI
+## Feature
+### Synchronized Effect
+The shimmering effect would be effectively displayed when all the subviews’s effect in the screen is synced and animated together.
+
+| Not Synced | Synced |
+|---|---|
+|![NotSynced](images/shimmer_view_not_synced.gif)|![Synced](images/shimmer_view_synced.gif)|
+
+ShimmerView calculates its relative coordinate against the sync target and synchronize the shimmering effect with other ShimmerViews.
+
+### Customizable
+You can customize the appearance of the shimmer effect by using `ShimmerViewStyle`.
+```swift
+let style = ShimmerViewStyle(
+    baseColor: UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0),
+    highlightColor: UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0),
+    duration: 1.2,
+    interval: 0.4,
+    effectSpan: .points(120),
+    effectAngle: 0 * CGFloat.pi)
+```
+
+## Usage on SwiftUI (iOS 14.0+)
 `ShimmerView` has two related APIs on SwiftUI as below:
 - `ShimmerScope`
 - `ShimmerElement`
 
-You can write a custome loading indicator like below by combining these APIs and other `SwiftUI` APIs.
+You can create a custome loading indicator by combining these APIs and other `SwiftUI` APIs.
 ```swift
 struct Placeholder: View {
 
@@ -73,27 +95,15 @@ shimmerView.startAnimating()
 
 The style of `ShimmerView` can be customized with `ShimmerViewStyle`.
 ```swift
-let style = ShimmerViewStyle(
-    baseColor: UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0),
-    highlightColor: UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0),
-    duration: 1.2,
-    interval: 0.4,
-    effectSpan: .points(120),
-    effectAngle: 0 * CGFloat.pi)
+let style = ShimmerViewStyle.default
 shimmerView.apply(style: style)
 ```
 
 ### ShimmerSyncTarget
-`ShimmerView` can be used as it is, but the shimmering effect would be effectively displayed when all the subviews’s effect in the screen is synced and animated together.
-
-| Not Synced | Synced |
-|---|---|
-|![NotSynced](images/shimmer_view_not_synced.gif)|![Synced](images/shimmer_view_synced.gif)|
-
-To make the best effect, create a view or view controller that contains multiple ShimmerViews and specify the container as `ShimmerSyncTarget`. ShimmerView will calculate its relative origin against the target and adjust the effect automatically.
+`ShimmerView` can be used as it is, but to make the best effect, create a view or view controller that contains multiple ShimmerViews and specify the container as `ShimmerSyncTarget`. ShimmerView will calculate its relative origin against the target and adjust the effect automatically.
 
 ### ShimmerReplicatorView & ShimmerReplicatorViewCell
-`ShimmerReplicatorView` will let you create a list type loading screen with a few lines of code.
+`ShimmerReplicatorView` will let you create a list type loading screen with a few lines of code. It replicates the `ShimmerReplicatorViewCell` provided by the `cellProvider` closure to fill the bounds of the view.
 
 ![ShimmerViewList](images/shimmer_view_list.gif)
 
