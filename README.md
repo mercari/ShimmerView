@@ -16,7 +16,8 @@ github "mercari/ShimmerView"
 `ShimmerView` has two related APIs on SwiftUI as below:
 - `ShimmerScope`
 - `ShimmerElement`
-You can write a custome loading indicator like below by combining these two APIs and other `SwiftUI` APIs.
+
+You can write a custome loading indicator like below by combining these APIs and other `SwiftUI` APIs.
 ```swift
 struct Placeholder: View {
 
@@ -43,6 +44,7 @@ struct Placeholder: View {
 }
 ```
 
+![ShimmerViewSwiftUI](images/shimmer_view_swift_ui.gif)
 
 ### ShimmerScope
 `ShimmerScope` is a container view to sync the animation timing and style of all the `ShimmerElement`s in its content.
