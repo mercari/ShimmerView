@@ -7,9 +7,13 @@ ShimmerView is a collection of APIs to construct Skelton View + Shimmering Effec
 ## Installation
 
 ### Carthage
-
 ```
 github "mercari/ShimmerView"
+```
+
+### Cocoapods
+```
+pod 'ShimmerView'
 ```
 
 ## Feature
