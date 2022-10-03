@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.swift_version = "5.0"
   s.ios.deployment_target = "11.0"
   s.source       = { :git => "https://github.com/mercari/ShimmerView.git", :tag => s.version }
-  s.source_files = "ShimmerView/**/*.swift"
+  s.source_files = "Sources/**/*.swift"
 end
