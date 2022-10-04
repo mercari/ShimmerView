@@ -16,6 +16,12 @@ github "mercari/ShimmerView"
 pod 'ShimmerView'
 ```
 
+### SwiftPM
+In your `Package.swift`, add the following line to the `dependencies`:
+```swift
+.package(url: "https://github.com/mercari/ShimmerView.git", from: #version#)
+```
+
 ## Feature
 ### Synchronized Effect
 The shimmering effect would be effectively displayed when all the subviews’s effect in the screen is synced and animated together.
