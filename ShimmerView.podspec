@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "ShimmerView"
-  s.version      = "0.4.0"
+  s.version      = "0.5.0"
   s.summary      = "A framework to create Skelton View + Shimmering Effect type loading indicator on UIKit and SwiftUI."
   s.homepage     = "https://github.com/mercari/ShimmerView"
   s.license      = "MIT"
