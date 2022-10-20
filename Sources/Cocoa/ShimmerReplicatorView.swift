@@ -1,9 +1,13 @@
+#if os(iOS)
 import UIKit
+#else
+import AppKit
+#endif
 
 /// ShimmerReplicatorView
 /// This class replicates the specified `ShimmerReplicatorViewCell` inside its frame in horizontal and vertical direction.
 /// This class make it easy to create list type loading indicator very easily.
-public class ShimmerReplicatorView: UIView {
+public class ShimmerReplicatorView: BaseView {
 
     public enum ItemSize {
         case fixedSize(CGSize)
@@ -32,16 +36,22 @@ public class ShimmerReplicatorView: UIView {
         case beyond
     }
 
+    #if os(iOS) || os(tvOS)
     public override class var layerClass: AnyClass {
         return CAReplicatorLayer.self
     }
+    #else
+    public override class var layer: AnyClass {
+        return CAReplicatorLayer.self
+    }
+    #endif
 
     private var replicatorLayer: CAReplicatorLayer {
         return layer as! CAReplicatorLayer
     }
 
-    private let stackView: UIStackView = {
-        let view = UIStackView()
+    private let stackView: BaseStackView = {
+        let view = BaseStackView()
         view.axis = .horizontal
         view.alignment = .leading
         view.distribution = .equalSpacing
@@ -54,12 +64,12 @@ public class ShimmerReplicatorView: UIView {
     public private(set) var itemSize: ItemSize
     public private(set) var interitemSpacing: CGFloat
     public private(set) var lineSpacing: CGFloat
-    public private(set) var inset: UIEdgeInsets
+    public private(set) var inset: BaseEdgeInsets
     public private(set) var horizontalEdgeMode: EdgeMode
     public private(set) var verticalEdgeMode: EdgeMode
     private let cellProvider: () -> ShimmerReplicatorViewCell
     
-    private var cellSizeConstraints = [UIView: [NSLayoutConstraint]]()
+    private var cellSizeConstraints = [BaseView: [NSLayoutConstraint]]()
     
     /// Initializer
     /// - Parameters:
@@ -70,7 +80,15 @@ public class ShimmerReplicatorView: UIView {
     ///   - horizontalEdgeMode: The edge mode for the horizontal direction.
     ///   - verticalEdgeMode: The edge mode for the vertical direction.
     ///   - cellProvider: A closure to create an instance of `ShimmerReplicatorViewCell`.
-    public init(itemSize: ItemSize, interitemSpacing: CGFloat = 0, lineSpacing: CGFloat = 0, inset: UIEdgeInsets = .zero, horizontalEdgeMode: EdgeMode = .beyond, verticalEdgeMode: EdgeMode = .beyond, cellProvider: @escaping () -> ShimmerReplicatorViewCell) {
+    public init(
+        itemSize: ItemSize,
+        interitemSpacing: CGFloat = 0,
+        lineSpacing: CGFloat = 0,
+        inset: BaseEdgeInsets = .zero,
+        horizontalEdgeMode: EdgeMode = .beyond,
+        verticalEdgeMode: EdgeMode = .beyond,
+        cellProvider: @escaping () -> ShimmerReplicatorViewCell
+    ) {
         self.itemSize = itemSize
         self.interitemSpacing = interitemSpacing
         self.lineSpacing = lineSpacing
@@ -98,7 +116,12 @@ public class ShimmerReplicatorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func set(itemSize: ItemSize? = nil, interitemSpacing: CGFloat? = nil, lineSpacing: CGFloat? = nil, inset: UIEdgeInsets? = nil) {
+    public func set(
+        itemSize: ItemSize? = nil,
+        interitemSpacing: CGFloat? = nil,
+        lineSpacing: CGFloat? = nil,
+        inset: BaseEdgeInsets? = nil
+    ) {
         if let itemSize = itemSize {
             self.itemSize = itemSize
         }

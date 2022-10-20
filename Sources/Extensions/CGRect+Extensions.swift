@@ -1,4 +1,4 @@
-import UIKit
+import CoreGraphics
 
 internal extension CGRect {
     var mid: CGPoint {

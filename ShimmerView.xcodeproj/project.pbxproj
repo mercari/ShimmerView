@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3DBD29E728EAD656006ED7AF /* UIResponder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD29E328EAD656006ED7AF /* UIResponder+Extensions.swift */; };
+		3DBAC34928ED17A800B6F60E /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBAC34828ED17A800B6F60E /* Typealiases.swift */; };
+		3DBD29E728EAD656006ED7AF /* Responder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD29E328EAD656006ED7AF /* Responder+Extensions.swift */; };
 		3DBD29E828EAD656006ED7AF /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD29E428EAD656006ED7AF /* CGRect+Extensions.swift */; };
-		3DBD29E928EAD656006ED7AF /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD29E528EAD656006ED7AF /* UIColor+Extensions.swift */; };
+		3DBD29E928EAD656006ED7AF /* BaseColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD29E528EAD656006ED7AF /* BaseColor+Extensions.swift */; };
 		3DBD29EA28EAD656006ED7AF /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD29E628EAD656006ED7AF /* CGPoint+Extensions.swift */; };
 		3DBD29EE28EAD662006ED7AF /* ShimmerCoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD29EB28EAD662006ED7AF /* ShimmerCoreView.swift */; };
 		3DBD29EF28EAD662006ED7AF /* ShimmerCoreView.Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD29EC28EAD662006ED7AF /* ShimmerCoreView.Animator.swift */; };
@@ -38,9 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3DBD29E328EAD656006ED7AF /* UIResponder+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extensions.swift"; sourceTree = "<group>"; };
+		3DBAC34828ED17A800B6F60E /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		3DBD29E328EAD656006ED7AF /* Responder+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Responder+Extensions.swift"; sourceTree = "<group>"; };
 		3DBD29E428EAD656006ED7AF /* CGRect+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
-		3DBD29E528EAD656006ED7AF /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		3DBD29E528EAD656006ED7AF /* BaseColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseColor+Extensions.swift"; sourceTree = "<group>"; };
 		3DBD29E628EAD656006ED7AF /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		3DBD29EB28EAD662006ED7AF /* ShimmerCoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShimmerCoreView.swift; sourceTree = "<group>"; };
 		3DBD29EC28EAD662006ED7AF /* ShimmerCoreView.Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShimmerCoreView.Animator.swift; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 				3DBD29E228EAD620006ED7AF /* Extensions */,
 				3DBD2A0528EAD696006ED7AF /* Info.plist */,
 				3DBD29DF28EAD606006ED7AF /* SwiftUI */,
-				3DBD29E028EAD613006ED7AF /* UIKit */,
+				3DBD29E028EAD613006ED7AF /* Cocoa */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -101,7 +103,7 @@
 			path = SwiftUI;
 			sourceTree = "<group>";
 		};
-		3DBD29E028EAD613006ED7AF /* UIKit */ = {
+		3DBD29E028EAD613006ED7AF /* Cocoa */ = {
 			isa = PBXGroup;
 			children = (
 				3DBD29FB28EAD67A006ED7AF /* ShimmerReplicatorView.swift */,
@@ -109,7 +111,7 @@
 				3DBD29FC28EAD67A006ED7AF /* ShimmerSyncTarget.swift */,
 				3DBD29F928EAD67A006ED7AF /* ShimmerView.swift */,
 			);
-			path = UIKit;
+			path = Cocoa;
 			sourceTree = "<group>";
 		};
 		3DBD29E128EAD61A006ED7AF /* Common */ = {
@@ -118,6 +120,7 @@
 				3DBD29EC28EAD662006ED7AF /* ShimmerCoreView.Animator.swift */,
 				3DBD29EB28EAD662006ED7AF /* ShimmerCoreView.swift */,
 				3DBD29ED28EAD662006ED7AF /* ShimmerViewStyle.swift */,
+				3DBAC34828ED17A800B6F60E /* Typealiases.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -127,8 +130,8 @@
 			children = (
 				3DBD29E628EAD656006ED7AF /* CGPoint+Extensions.swift */,
 				3DBD29E428EAD656006ED7AF /* CGRect+Extensions.swift */,
-				3DBD29E528EAD656006ED7AF /* UIColor+Extensions.swift */,
-				3DBD29E328EAD656006ED7AF /* UIResponder+Extensions.swift */,
+				3DBD29E528EAD656006ED7AF /* BaseColor+Extensions.swift */,
+				3DBD29E328EAD656006ED7AF /* Responder+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -274,16 +277,17 @@
 			files = (
 				3DBD2A3428EADC05006ED7AF /* ShimmerReplicatorView.swift in Sources */,
 				3DBD2A3528EADC05006ED7AF /* ShimmerReplicatorViewCell.swift in Sources */,
+				3DBAC34928ED17A800B6F60E /* Typealiases.swift in Sources */,
 				3DBD2A3628EADC05006ED7AF /* ShimmerSyncTarget.swift in Sources */,
 				3DBD2A3728EADC05006ED7AF /* ShimmerView.swift in Sources */,
 				3DBD2A0328EAD685006ED7AF /* ShimmerScope.swift in Sources */,
 				3DBD2A0428EAD685006ED7AF /* ShimmerElement.swift in Sources */,
 				3DBD29F028EAD662006ED7AF /* ShimmerViewStyle.swift in Sources */,
-				3DBD29E728EAD656006ED7AF /* UIResponder+Extensions.swift in Sources */,
+				3DBD29E728EAD656006ED7AF /* Responder+Extensions.swift in Sources */,
 				3DBD29E828EAD656006ED7AF /* CGRect+Extensions.swift in Sources */,
 				3DBD29EF28EAD662006ED7AF /* ShimmerCoreView.Animator.swift in Sources */,
 				3DBD29EA28EAD656006ED7AF /* CGPoint+Extensions.swift in Sources */,
-				3DBD29E928EAD656006ED7AF /* UIColor+Extensions.swift in Sources */,
+				3DBD29E928EAD656006ED7AF /* BaseColor+Extensions.swift in Sources */,
 				3DBD29EE28EAD662006ED7AF /* ShimmerCoreView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,10 +366,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -419,9 +425,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;

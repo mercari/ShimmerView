@@ -1,7 +1,10 @@
+#if os(iOS) || os(tvOS)
 import UIKit
+#else
+import AppKit
+#endif
 
 public extension ShimmerView {
-    
     /// Effect Span
     /// Effect Span is the length of the gradation of shimmering effect.
     /// If it is specified in ratio, the effect span in points will be calculated as SyncTargetView.frame.diagonalDistance * ratio.
@@ -12,26 +15,32 @@ public extension ShimmerView {
 }
 
 public struct ShimmerViewStyle: Equatable {
-    
     /// The base color of the skelton view/shimmering effect.
-    public var baseColor: UIColor
-    
+    public var baseColor: BaseColor
+
     /// The highlight color of the shimmering effect.
-    public var highlightColor: UIColor
-    
+    public var highlightColor: BaseColor
+
     /// The duration of the shimmering effect.
     public var duration: CFTimeInterval
-    
+
     /// The interval of the shimmering effect. The length of one repetition of shimmering effect will be `duration` + `interval`.
     public var interval: CFTimeInterval
-    
+
     /// The length of the gradation of shimmering effect.
     public var effectSpan: ShimmerView.EffectSpan
 
     /// The tilt angle of the effect. Please specify using radian.
     public var effectAngle: CGFloat
-    
-    public init(baseColor: UIColor, highlightColor: UIColor, duration: CFTimeInterval, interval: CFTimeInterval, effectSpan: ShimmerView.EffectSpan, effectAngle: CGFloat) {
+
+    public init(
+        baseColor: BaseColor,
+        highlightColor: BaseColor,
+        duration: CFTimeInterval,
+        interval: CFTimeInterval,
+        effectSpan: ShimmerView.EffectSpan,
+        effectAngle: CGFloat
+    ) {
         self.baseColor = baseColor
         self.highlightColor = highlightColor
         self.duration = duration
@@ -42,5 +51,22 @@ public struct ShimmerViewStyle: Equatable {
 }
 
 public extension ShimmerViewStyle {
-    static let `default` = ShimmerViewStyle(baseColor: UIColor(red: 239/255, green: 239/255, blue: 239/255, alpha: 1.0), highlightColor: UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0), duration: 1.2, interval: 0.4, effectSpan: .points(120), effectAngle: 0 * CGFloat.pi)
+    static let `default` = ShimmerViewStyle(
+        baseColor: BaseColor(
+            red: 239/255,
+            green: 239/255,
+            blue: 239/255,
+            alpha: 1.0
+        ),
+        highlightColor: BaseColor(
+            red: 247/255,
+            green: 247/255,
+            blue: 247/255,
+            alpha: 1.0
+        ),
+        duration: 1.2,
+        interval: 0.4,
+        effectSpan: .points(120),
+        effectAngle: 0 * CGFloat.pi
+    )
 }

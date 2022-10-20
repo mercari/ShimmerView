@@ -1,4 +1,4 @@
-import UIKit
+import QuartzCore
 import simd
 
 internal extension ShimmerCoreView {
@@ -40,8 +40,8 @@ internal extension ShimmerCoreView {
             let baseColor = style.baseColor
             let highlightColor = style.highlightColor
             let numberOfSteps = 30
-            let baseColors: [UIColor] = [baseColor, highlightColor, baseColor]
-            var colors: [UIColor] = []
+            let baseColors: [BaseColor] = [baseColor, highlightColor, baseColor]
+            var colors: [BaseColor] = []
             for i in 0..<baseColors.count-1 {
                 let lengthOfStep = 1.0 / Float(numberOfSteps)
                 let newColors = stride(from: 0.0, to: 1.0, by: lengthOfStep).map {

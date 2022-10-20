@@ -1,9 +1,13 @@
+#if os(iOS) || os(tvOS)
 import UIKit
+#else
+import AppKit
+#endif
 
 /// Shimmer Sync Target
 /// The shimmering effect would be effectively displayed when all the subviews’s effect in the screen is synced and animated together.
 /// Shimmer view finds its nearest ShimmerSyncTarget in its responder chain and adjusts its shimmering effect according to the sync target's configuration.
-public protocol ShimmerSyncTarget: UIResponder {
+public protocol ShimmerSyncTarget: Responder {
     
     /// The style of the shimmering effect.
     var style: ShimmerViewStyle { get }
@@ -13,17 +17,17 @@ public protocol ShimmerSyncTarget: UIResponder {
     var effectBeginTime: CFTimeInterval { get }
 
     /// All the child `ShimmerView` under ShimmerSyncTarget will calculate its effect for this sync target view's frame.
-    var syncTargetView: UIView { get }
+    var syncTargetView: BaseView { get }
 }
 
-public extension ShimmerSyncTarget where Self: UIView {
-    var syncTargetView: UIView {
+public extension ShimmerSyncTarget where Self: BaseView {
+    var syncTargetView: BaseView {
         return self
     }
 }
 
-public extension ShimmerSyncTarget where Self: UIViewController {
-    var syncTargetView: UIView {
+public extension ShimmerSyncTarget where Self: BaseViewController {
+    var syncTargetView: BaseView {
         return view
     }
 }

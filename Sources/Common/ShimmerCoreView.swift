@@ -1,6 +1,10 @@
+#if os(iOS) || os(tvOS)
 import UIKit
+#else
+import AppKit
+#endif
 
-internal class ShimmerCoreView: UIView {
+internal class ShimmerCoreView: BaseView {
     static let animationKey = "ShimmerEffect"
 
     private(set) var gradientLayer: CAGradientLayer = {
@@ -29,8 +33,13 @@ internal class ShimmerCoreView: UIView {
     }
 
     private func setup() {
+        #if os(iOS) || os(tvOS)
         layer.masksToBounds = true
         layer.addSublayer(gradientLayer)
+        #else
+        layer?.masksToBounds = true
+        layer?.addSublayer(gradientLayer)
+        #endif
         scaleGradientLayerToAspectFill()
     }
 
@@ -68,24 +77,25 @@ internal class ShimmerCoreView: UIView {
         if let baseBounds = baseBounds {
             self.baseBounds = baseBounds
         }
-        
+
         if let elementFrame = elementFrame {
             self.elementFrame = elementFrame
         }
-        
+
         if let style = style {
             self.style = style
         }
-        
+
         if let effectBeginTime = effectBeginTime {
             self.effectBeginTime = effectBeginTime
         }
-        
+
         if isAnimating {
             setupAnimation()
         }
     }
 
+    #if os(iOS) || os(tvOS)
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -95,6 +105,17 @@ internal class ShimmerCoreView: UIView {
             startAnimating()
         }
     }
+    #else
+    override func layout() {
+        super.layout()
+
+        scaleGradientLayerToAspectFill()
+
+        if isAnimating {
+            startAnimating()
+        }
+    }
+    #endif
 
     private func scaleGradientLayerToAspectFill() {
         if frame.width > frame.height {

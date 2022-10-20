@@ -1,10 +1,18 @@
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#else
+import AppKit
+#endif
 
-open class ShimmerView: UIView, ShimmerSyncTarget {
+open class ShimmerView: BaseView, ShimmerSyncTarget {
     internal var coreView: ShimmerCoreView = {
         let view = ShimmerCoreView()
+        #if os(iOS) || os(tvOS)
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        #else
+        view.autoresizingMask = [.width, .height]
+        #endif
         return view
     }()
 
@@ -60,9 +68,17 @@ open class ShimmerView: UIView, ShimmerSyncTarget {
         coreView.update(style: style)
     }
 
+    #if os(iOS) || os(tvOS)
     override public func layoutSubviews() {
         super.layoutSubviews()
-        
+
         coreView.update(baseBounds: baseBounds, elementFrame: elementFrame)
     }
+    #else
+    override public func layout() {
+        super.layout()
+
+        coreView.update(baseBounds: baseBounds, elementFrame: elementFrame)
+    }
+    #endif
 }

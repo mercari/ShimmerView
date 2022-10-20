@@ -1,10 +1,10 @@
-import UIKit
+import CoreGraphics
 
 internal extension CGPoint {
     func add(vector: CGVector) -> CGPoint {
         CGPoint(x: x+vector.dx, y: y+vector.dy)
     }
-    
+
     func subtract(vector: CGVector) -> CGPoint {
         CGPoint(x: x-vector.dx, y: y-vector.dy)
     }
