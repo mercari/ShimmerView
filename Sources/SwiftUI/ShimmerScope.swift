@@ -10,7 +10,7 @@ public struct ShimmerScope<Content: View>: View {
     public init(
         style: ShimmerViewStyle = .default,
         isAnimating: Binding<Bool>,
-        content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.style = style
         _isAnimating = isAnimating
